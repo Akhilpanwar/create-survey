@@ -1,0 +1,112 @@
+
+#dropdown-basic-button::after {
+  content: none;
+  border:none;
+outline:none;
+
+}
+.place{
+padding:12px;
+font-size:22px;
+  
+}
+
+#dropdown-basic-button:focus:hover{
+  border:none;
+  outline:none;
+  
+}
+.mydropdown:active{
+  border:none;
+  font:bold;
+  outline:none;
+}
+
+.dropbtn{
+  position: absolute;
+  left:19rem;
+  top:.7rem;
+}
+.popover-positioned-top{
+  overflow-Y:scroll;
+  height:40rem;
+ 
+}
+#firstdrop,#secondDrop,#thirdDrop,#fourthDrop,#fifthDrop,#sixthDrop{
+  display: none;
+}
+.drop{
+  display:none;
+  align-items: flex-end;
+}
+@media (max-width:1000px) and (min-width:0px)  {
+ .translation{
+    display:none;
+    flex-direction: column;
+  }
+  .drop{
+    display:flex;
+    align-items: flex-end;
+  }
+
+#firstDrop{
+    display: flex;
+  }
+}
+@media (max-width:900px) and (min-width:0px)  {
+  .embeded{
+     display:none;
+     flex-direction: column;
+   }
+   #secondDrop{
+    display: flex;
+  }
+ }
+ @media (max-width:800px) and (min-width:0px)  {
+  .json{
+    display: none;
+    flex-direction: flex;
+  }
+
+ #thirdDrop{
+  display: flex;
+ }
+}
+@media (max-width:700px) and (min-width:0px)  {
+  .logic{
+     display:none;
+    
+   }
+   #fourthDrop{
+    display: flex;
+    flex-direction: flex;
+  }
+ }
+ @media (max-width:600px) and (min-width:0px)  {
+  .preview{
+     display:none;
+  
+   }
+   #fifthDrop{
+    display: flex;
+  }
+ }
+ @media (max-width:600px) and (min-width:0px)  {
+  .embeded{
+     display:none;
+     flex-direction: column;
+   }
+   #fifthDrop{
+    display: flex;
+  }
+ }
+ @media (max-width:500px) and (min-width:0px)  {
+  .designer{
+     display:none;
+     
+   }
+   
+   #sixthDrop{
+    display:flex;
+  }
+ }
