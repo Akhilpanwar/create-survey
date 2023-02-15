@@ -1,112 +1,123 @@
-
 #dropdown-basic-button::after {
   content: none;
-  border:none;
-outline:none;
-
+  border: none;
+  outline: none;
 }
-.place{
-padding:12px;
-font-size:22px;
-  
+.place {
+  padding: 12px;
+  font-size: 22px;
 }
 
-#dropdown-basic-button:focus:hover{
-  border:none;
-  outline:none;
-  
+#dropdown-basic-button:focus:hover {
+  border: none;
+  outline: none;
 }
-.mydropdown:active{
-  border:none;
-  font:bold;
-  outline:none;
+.mydropdown:active {
+  border: none;
+  font: bold;
+  outline: none;
 }
 
-.dropbtn{
+.draggable {
+  border-radius: 4px;
+  background: #cc0000;
+  width: 40px;
+  height: 40px;
+}
+.dropbtn {
   position: absolute;
-  left:19rem;
-  top:.7rem;
+  left: 19rem;
+  top: 0.7rem;
 }
-.popover-positioned-top{
-  overflow-Y:scroll;
-  height:40rem;
- 
+#popover-positioned-top {
+  border-radius: 0 !important;
+  border: none;
 }
-#firstdrop,#secondDrop,#thirdDrop,#fourthDrop,#fifthDrop,#sixthDrop{
+.popover-positioned-top {
+  overflow-y: scroll;
+  height: 24rem;
+  font-size: 1.2rem;
+  font-weight: 100 !important;
+  box-shadow: 0px calc(1 * var(--base-unit, 8px))
+    calc(2 * var(--base-unit, 8px)) rgba(0, 0, 0, 0.1);
+}
+#firstdrop,
+#secondDrop,
+#thirdDrop,
+#fourthDrop,
+#fifthDrop,
+#sixthDrop {
   display: none;
 }
-.drop{
-  display:none;
+.drop {
+  display: none;
   align-items: flex-end;
 }
-@media (max-width:1000px) and (min-width:0px)  {
- .translation{
-    display:none;
+@media (max-width: 1000px) and (min-width: 0px) {
+  .translation {
+    display: none;
     flex-direction: column;
   }
-  .drop{
-    display:flex;
+  .drop {
+    display: flex;
     align-items: flex-end;
   }
 
-#firstDrop{
+  #firstDrop {
     display: flex;
   }
 }
-@media (max-width:900px) and (min-width:0px)  {
-  .embeded{
-     display:none;
-     flex-direction: column;
-   }
-   #secondDrop{
+@media (max-width: 900px) and (min-width: 0px) {
+  .embeded {
+    display: none;
+    flex-direction: column;
+  }
+  #secondDrop {
     display: flex;
   }
- }
- @media (max-width:800px) and (min-width:0px)  {
-  .json{
+}
+@media (max-width: 800px) and (min-width: 0px) {
+  .json {
     display: none;
     flex-direction: flex;
   }
 
- #thirdDrop{
-  display: flex;
- }
+  #thirdDrop {
+    display: flex;
+  }
 }
-@media (max-width:700px) and (min-width:0px)  {
-  .logic{
-     display:none;
-    
-   }
-   #fourthDrop{
+@media (max-width: 700px) and (min-width: 0px) {
+  .logic {
+    display: none;
+  }
+  #fourthDrop {
     display: flex;
     flex-direction: flex;
   }
- }
- @media (max-width:600px) and (min-width:0px)  {
-  .preview{
-     display:none;
-  
-   }
-   #fifthDrop{
+}
+@media (max-width: 600px) and (min-width: 0px) {
+  .preview {
+    display: none;
+  }
+  #fifthDrop {
     display: flex;
   }
- }
- @media (max-width:600px) and (min-width:0px)  {
-  .embeded{
-     display:none;
-     flex-direction: column;
-   }
-   #fifthDrop{
+}
+@media (max-width: 600px) and (min-width: 0px) {
+  .embeded {
+    display: none;
+    flex-direction: column;
+  }
+  #fifthDrop {
     display: flex;
   }
- }
- @media (max-width:500px) and (min-width:0px)  {
-  .designer{
-     display:none;
-     
-   }
-   
-   #sixthDrop{
-    display:flex;
+}
+@media (max-width: 500px) and (min-width: 0px) {
+  .designer {
+    display: none;
   }
- }
+
+  #sixthDrop {
+    display: flex;
+  }
+}

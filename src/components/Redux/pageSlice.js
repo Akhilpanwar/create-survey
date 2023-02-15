@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const i = 1;
+const myArr=[  
+ 
+    {
+      name: `Page${i}`,
+
+      elements: [],
+    },
+  ]
+
 const initialState = [
   {
     Pages: [
@@ -18,17 +26,27 @@ const pageSlice = createSlice({
   name: "Pages",
   initialState,
   reducers: {
+    changeElement(state=initialState,action){
+      console.log(action.payload.v)
+state[0].Pages[action.payload.PageIndex].elements[action.payload.elementIndex].name=action.payload.v
+    },
+    DeleteAll(state = initialState, action) {
+     state[0].Pages.splice(0 ,state[0].Pages.length)
+     state[0].Pages.push(...myArr)
+    },
     AddQuestions(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements.push(
         action.payload.element
       );
     },
-
+DropQuestions(state=initialState,action){
+  state[0].Pages[action.payload.PageIndex].elements.push(
+    action.payload.element
+  );
+},
     changeType(state = initialState, action) {
-      state[0].value = state[0].value + 1;
-      state[0].Pages[action.payload.PageIndex].elements[
-        action.payload.ElementIndex
-      ].type = action.payload.title;
+     
+      state[0].Pages[action.payload.PageIndex].elements.splice(action.payload.ElementIndex,1,action.payload.v)
     },
     DeleteQuestion(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements.splice(
@@ -55,7 +73,7 @@ const pageSlice = createSlice({
     RemoveRadio(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements[
         action.payload.elementIndex
-      ].Choices.splice(action.payload.index,1);
+      ].Choices.splice(action.payload.index, 1);
     },
     RadioShowOther(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements[
@@ -81,7 +99,9 @@ const pageSlice = createSlice({
     AddImage(state = initialState, action) {
       console.log("========", action.payload);
 
-      state[0].Pages[action.payload.PageIndex].elements[action.payload.elementIndex].Choices.push({
+      state[0].Pages[action.payload.PageIndex].elements[
+        action.payload.elementIndex
+      ].Choices.push({
         imageLink: action.payload.fileString,
       });
     },
@@ -99,12 +119,15 @@ const pageSlice = createSlice({
       console.log(action.payload);
       state[0].Pages[action.payload.PageIndex].elements[
         action.payload.elementIndex
-      ].Choices.splice(action.payload.ind,1);
+      ].Choices.splice(action.payload.ind, 1);
     },
   },
 });
 
 export const {
+  DropQuestions,
+  changeElement,
+  DeleteAll,
   RemoveRank,
   AddRank,
   AddQuestions,

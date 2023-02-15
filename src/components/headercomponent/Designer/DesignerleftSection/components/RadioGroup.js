@@ -92,8 +92,8 @@ function RadioGroup({ items, PageIndex, elementIndex }) {
       })}
     
       <StyledDiv DP="flex">
-        <StyledDiv DP="flex" AI="center">
-          <StyledDiv DP="flex">
+        <StyledDiv DP="flex" >
+          
             <IoIosAddCircle
               color="rgb(25, 179, 148)"
               size={20}
@@ -120,7 +120,7 @@ function RadioGroup({ items, PageIndex, elementIndex }) {
               />
             </StyledDiv>
           </StyledDiv>
-          <StyledDiv>
+          <StyledDiv DP="flex">
             <SurveyInput
               DP="flex"
               contentEditable="true"
@@ -135,7 +135,7 @@ function RadioGroup({ items, PageIndex, elementIndex }) {
             />
           </StyledDiv>
         </StyledDiv>
-      </StyledDiv>
+                
 
       <StyledDiv AI="center" DP="flex">
         <StyledDiv DP="flex" JC="center">

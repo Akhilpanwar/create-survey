@@ -6,6 +6,7 @@ import {
   DeletePage,
   DuplicatePage,
 } from "../../../Header/styles";
+
 import { useSelector, useDispatch } from "react-redux";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -42,10 +43,11 @@ function Pages() {
 
     Dispatch(AddQuestionId());
   };
-  const handleDuplicatePages = (item, Qn, Pn) => {
+  const handleDuplicatePages = (page, Qn, Pn) => {
+    console.log("i clicked");
     let temp = [];
 
-    item.elements.map((it, i) => {
+    page.elements.map((it, i) => {
       Dispatch(AddQuestionId());
 
       temp.push({
@@ -61,7 +63,7 @@ function Pages() {
       Qn += 1;
     });
 
-    const newPage = Object.assign({}, item, {
+    const newPage = Object.assign({}, page, {
       name: `Page${+Pn}`,
       elements: [...temp],
     });
@@ -89,50 +91,56 @@ function Pages() {
     Dispatch(addIndex(pageIndex));
   };
   return (
-    <StyledDiv WD="70%"  style={{margin:"auto"}}>
-      <StyledDiv DP="flex" MBS="1rem">
-      <StyledDiv  DP="flex"  style={{minHeight:"100%"}} JC="space-between" FD="column" >
-       
-    
-       
-              <StyledDiv DP="flex" FD="row" JC="space-between">
-                <StyledDiv >
-                  <SurveyInput
-                    DP="flex"
-                    placeholder="survey Title"
-                    contentEditable="true"
-                    FWD="fit-content"
-                    FS="44px"
-                    PTC="44px"
-                    OW="break-word"
-                    WW="break-word"
-                    WB="break-word"
-                    OT="none"
-                    FOT="3px solid rgb(25, 179, 148)"
-                    FBR="calc(.5 * var(--base-unit, 8px))"
-                    HG="100%"
-                  />
-                </StyledDiv>
-                <StyledDiv >
-                  <label for="img">
-                    <BsImage
-                      size={40}
-                      color="lightgrey"
-                      onMouseOver={(e) => handleIconMouseover(e)}
-                      onMouseOut={({ target }) =>
-                        (target.style.color = "lightgrey")
-                      }
-                    />
-                  </label>
-                  <input
-                    id="img"
-                    style={{ display: "none" }}
-                    type="file"
-                  ></input>
-                </StyledDiv>
+    <StyledDiv
+      WD="100%"
+      HG="100%"
+      DP="flex"
+      AI="center"
+      JC="center"
+      style={{ boxSizing: "border-box" }}
+    >
+      <StyledDiv DP="flex" HG="90%" WD="90%" FD="column" AI="center">
+        <StyledDiv DP="flex" FD="column" JC="space-between" WD="90%">
+          <StyledDiv
+            DP="flex"
+            FD="column"
+            WD="95%"
+            AS="center"
+            style={{ boxSizing: "content-box" }}
+          >
+            <StyledDiv DP="flex" FD="row" JC="space-between">
+              <StyledDiv DP="flex">
+                <SurveyInput
+                  DP="flex"
+                  placeholder="survey Title"
+                  contentEditable="true"
+                  FWD="fit-content"
+                  FS="44px"
+                  PTC="44px"
+                  OW="break-word"
+                  WW="break-word"
+                  WB="break-word"
+                  OT="none"
+                  FOT="3px solid rgb(25, 179, 148)"
+                  FBR="calc(.5 * var(--base-unit, 8px))"
+                  HG="100%"
+                />
               </StyledDiv>
-           
-            <StyledDiv>
+              <StyledDiv DP="flex">
+                <label for="img">
+                  <BsImage
+                    size={40}
+                    color="lightgrey"
+                    onMouseOver={(e) => handleIconMouseover(e)}
+                    onMouseOut={({ target }) =>
+                      (target.style.color = "lightgrey")
+                    }
+                  />
+                </label>
+                <input id="img" style={{ display: "none" }} type="file"></input>
+              </StyledDiv>
+            </StyledDiv>
+            <StyledDiv style={{ whiteSpace: "pre" }}>
               <SurveyInput
                 DP="flex"
                 PTC="20px"
@@ -149,109 +157,109 @@ function Pages() {
                 FBR="5px"
               />
             </StyledDiv>
-        
-       
-        <StyledDiv>
-          <BottomBorder></BottomBorder>
-        </StyledDiv>
-        
-        <StyledDiv>
-          {pages.map((page, pageIndex) => {
-            return (
-              <StyledDiv
-                tabIndex="1234"
-                onClick={() => handleClick(pageIndex)}
-                FBG="rgba(251,235,221,1.00)"
-                HBG="rgba(251,235,221,1.00)"
-                HIB="rgba(251,235,221,1.00)"
-                FOT="2px solid orange"
-                HBDP="flex"
-                FBDP="flex"
-                DP="flex"
-                style={{
-                  boxSizing: "border-box",
-               minHeight:"100%",
-                  Width: "100%",
-                }}
-              >
-                <StyledDiv DP="flex">
-                <StyledDiv DP="flex" FD="column" JC="space-around">
+          </StyledDiv>
 
-                <StyledDiv DP="flex" FD="row"  JC="space-between">
-                <StyledDiv>
-                <SurveyInput
-                  PFC="35pxpx"
+          <StyledDiv>
+            <BottomBorder></BottomBorder>
+          </StyledDiv>
+          <StyledDiv style={{ minHeight: "100%" }}>
+            {pages.map((page, pageIndex) => {
+              return (
+                <StyledDiv
+                  onClick={() => handleClick(pageIndex)}
+                  FBG="rgba(251,235,221,1.00)"
+                  HBG="rgba(251,235,221,1.00)"
+                  HIB="rgba(251,235,221,1.00)"
+                  FOT="2px solid orange"
+                  FBV="visible"
                   DP="flex"
-                  FS="35px"
-                  contentEditable="true"
-                  placeholder={`${page.name}`}
-                  OT="none"
-                  FBG="white"
-                  FOT="2px solid rgb(25, 179, 148)"
-                  FWD="fit-content"
-                  OW="break-word"
-                  WW="break-word"
-                  WB="break-word"
-                  FBR="3px"
-                />
-                </StyledDiv>
-<StyledDiv DP="flex" FD="row">
-  <StyledDiv>
-                <DuplicatePage
-                  PD="none"
-                  BG="none"
-                  onClick={() => handleDuplicatePages(page, Qn, Pn)}
-                >
-                  <HiOutlineDuplicate color="orange" /> Duplicate
-                </DuplicatePage>
-                </StyledDiv>
-                <StyledDiv>
-                <DeletePage
-                  WD="140px"
-                  PD="none"
-                  BG="none"
-                  onClick={() => handleDeletePages(page, pageIndex)}
-                >
-                  <RiDeleteBin6Line color="orange" /> Delete
-                </DeletePage>
-                </StyledDiv>
-</StyledDiv>
-</StyledDiv>
-<StyledDiv>
-                <SurveyInput
-                  FS="18px"
-                  role="textBox"
-                  contentEditable="true"
-                  placeholder="Description"
-                  OT="none"
-                  FBG="white"
-                  FOT="3px solid rgb(25, 179, 148)"
-                  FWD="fit-content"
-                  OW="break-word"
-                  WW="break-word"
-                  WB="break-word"
-                  FBR="3px"
-                />
+                  HBV="visible"
+                  style={{
+                    boxSizing: "content-box",
 
-</StyledDiv>
-<StyledDiv >
-                <Questionsdata
-                  Page={page}
-                  PageIndex={pageIndex}
-                  Add={handleQuestion}
-                  DeleteQuestions={handleDeleteQuestions}
-                  DuplicateQuestion={handleDuplicateQuestion}
-                />
+                    Width: "100%",
+                  }}
+                  tabIndex="1234"
+                >
+                  <StyledDiv
+                    DP="flex"
+                    style={{ margin: "auto" }}
+                    WD="95%"
+                    FD="column"
+                    JC="space-evenly"
+                  >
+                    <StyledDiv DP="flex" FD="column" JC="space-between">
+                      <StyledDiv DP="flex" FD="row" JC="flex-end">
+                        <StyledDiv>
+                          <DuplicatePage
+                            PD="none"
+                            BG="none"
+                            onClick={() => handleDuplicatePages(page, Qn, Pn)}
+                          >
+                            <HiOutlineDuplicate color="orange" /> Duplicate
+                          </DuplicatePage>
+                        </StyledDiv>
+                        <StyledDiv>
+                          <DeletePage
+                            WD="140px"
+                            PD="none"
+                            BG="none"
+                            onClick={() => handleDeletePages(page, pageIndex)}
+                          >
+                            <RiDeleteBin6Line color="orange" /> Delete
+                          </DeletePage>
+                        </StyledDiv>
+                      </StyledDiv>
+                      <StyledDiv>
+                        <SurveyInput
+                          PFC="35px"
+                          DP="flex"
+                          FS="35px"
+                          contentEditable="true"
+                          placeholder={`${page.name}`}
+                          OT="none"
+                          FBG="white"
+                          FOT="2px solid rgb(25, 179, 148)"
+                          FWD="fit-content"
+                          OW="break-word"
+                          WW="break-word"
+                          WB="break-word"
+                          FBR="3px"
+                        />
+                      </StyledDiv>
+                    </StyledDiv>
+                    <StyledDiv>
+                      <SurveyInput
+                        FS="18px"
+                        role="textBox"
+                        contentEditable="true"
+                        placeholder="Description"
+                        OT="none"
+                        FBG="white"
+                        FOT="3px solid rgb(25, 179, 148)"
+                        FWD="fit-content"
+                        OW="break-word"
+                        WW="break-word"
+                        WB="break-word"
+                        FBR="3px"
+                      />
+                    </StyledDiv>
+                    <StyledDiv>
+                      <Questionsdata
+                        Page={page}
+                        PageIndex={pageIndex}
+                        Add={handleQuestion}
+                        DeleteQuestions={handleDeleteQuestions}
+                        DuplicateQuestion={handleDuplicateQuestion}
+                      />
+                    </StyledDiv>
+                  </StyledDiv>
                 </StyledDiv>
-                </StyledDiv>
-              </StyledDiv>
-              </StyledDiv>
-            );
-          })}
+              );
+            })}
+          </StyledDiv>
         </StyledDiv>
-
       </StyledDiv>
-    </StyledDiv>
     </StyledDiv>
   );
 }

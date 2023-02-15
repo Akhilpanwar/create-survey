@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 function App() {
   
   return (
-    <StyledDiv HG="800px">
+    <StyledDiv style={{minWidth:"initial"}}>
    <Provider store={store}>
 <Header/>
 </Provider>

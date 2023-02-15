@@ -71,25 +71,27 @@ export const StyledLi = styled.li`
   list-style: none;
   height: ${(props) => props.HG};
   width: ${(props) => props.WD};
+ 
 
   height: 40px;
 
   white-space: ${(props) => props.WS};
   padding-left: 1rem;
-  padding-right: 2rem;
+  padding-right: 1rem;
   border-radius: ${(props) => props.BR};
 
   &:hover {
-    background-color: ${(props) => props.HBG};
+    background-color: white;
     box-shadow: ${(props) => props.HBS};
     height: 40px;
-
+    background:${(props)=>props.BG};
     padding-left: 1rem;
     cursor: default;
-    transition: padding-right;
+    transition:padding-right 10000ms;
   }
   i {
     font: 1em/1 "rokkitt", sans-serif;
+  
   }
   b {
     color: grey;
@@ -101,7 +103,9 @@ export const StyledLi = styled.li`
 
   &:hover b {
     color: rgb(25, 179, 148);
+   
   }
+
 `;
 
 export const StyledButton = styled.button`
@@ -307,7 +311,7 @@ export const DuplicatePage = styled.button`
   background: none;
   cursor: pointer;
   float: ${(props) => props.FL};
-  display: none;
+  visibility:hidden;
   &:hover {
     background: white;
   }
@@ -318,7 +322,7 @@ export const DeletePage = styled.button`
   background: none;
   cursor: pointer;
   float: ${(props) => props.FL};
-  display: none;
+  visibility:hidden;
   &:hover {
     background: white;
   }

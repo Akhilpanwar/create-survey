@@ -9,6 +9,10 @@ const initialState = {
   PageId: 2,
   QuestionId: 1,
  index:0,
+ drag:{},
+
+
+
 };
 
 const surveySlice = createSlice({
@@ -20,7 +24,9 @@ const surveySlice = createSlice({
     },
 
 
-
+setQuestionId(state=initialState,action){
+  state.QuestionId=1
+},
     AddQuestionId(state = initialState, action) {
       state.QuestionId += 1;
     },
@@ -36,12 +42,22 @@ state.PageId-=1;
     DeleteQuestionId(state = initialState, action) {
       state.QuestionId -= 1;
     },
+DragElement(state=initialState,action){
+  const item=action.payload.element;
+const number=action.payload.Qn;
+  const Index =action.payload.PageIndex;
+  console.log(item,number,Index)
 
+state.drag=(item)
+state.index=(Index)
+state.QuestionId=(number)
+}
   },
 });
 
 export const {
-
+  setQuestionId,
+DragElement,
   addIndex,
   AddQuestionId,
   AddPageId,

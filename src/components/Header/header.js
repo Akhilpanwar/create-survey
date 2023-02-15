@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyledDiv, StyledSpan } from "./styles";
+import { Delete, StyledDiv, StyledSpan } from "./styles";
 
 import Designer from "../headercomponent/Designer/Designer";
 import Logic from "../headercomponent/Logic/Logic";
@@ -8,11 +8,16 @@ import Jsoneditor from "../headercomponent/jsonEditor/jsoneditor";
 import EmbededSurvey from "../headercomponent/EmbedSurvey/EmbededSurvey";
 import Translation from "../headercomponent/Translation/Translation";
 import { useSelector } from "react-redux";
-
+import { BiEraser } from "react-icons/bi";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { useDispatch } from "react-redux";
+import { DeleteAll } from "../Redux/pageSlice";
+import { setQuestionId } from "../Redux/surveySlice";
 
 function Header() {
+  const Dispatch = useDispatch();
+
   const survey = useSelector((state) => state.surveyReducer.surveyData);
   const item5 = survey[5].title;
   const item4 = survey[4].title;
@@ -23,6 +28,7 @@ function Header() {
   const [lastIndex, setLastIndex] = useState(6);
 
   const [component, setComponent] = useState(<Designer />);
+  const page = useSelector((state) => state.PageReducer[0].Pages[0].elements);
 
   const handleClick = (item, item5, item4, item3, item2, item1, item0) => {
     switch (item.title || item4 || item5 || item3 || item2 || item1 || item0) {
@@ -51,8 +57,24 @@ function Header() {
     }
   };
 
+  const handleDeleteAll = () => {
+    if (page.length > 0) {
+      const confirmBox = window.confirm(
+        "You are going to delete all elements in this survey. Do you want to proceed?"
+      );
+      if (confirmBox === true) {
+        DeleteData();
+      }
+    }
+  };
+
+  const DeleteData = () => {
+    Dispatch(DeleteAll());
+    Dispatch(setQuestionId());
+  };
+
   return (
-    <StyledDiv   style={{margin:"auto"}} >
+    <StyledDiv style={{ margin: "auto" }}>
       <StyledDiv DP="flex" BB="1px solid lightgrey" BG="white" HG="9rem">
         {survey.map((item, index) => {
           return (
@@ -75,6 +97,7 @@ function Header() {
             </StyledDiv>
           );
         })}
+
         <DropdownButton
           className="drop"
           variant="none"
@@ -100,12 +123,18 @@ function Header() {
             {survey[0].title}
           </Dropdown.Item>
         </DropdownButton>
+        <StyledDiv DP="flex" AS="end" PB="8px" PT="10px" WD="20%" JC="center">
+          <BiEraser
+            color={!page.length > 0 ? "grey" : ""}
+            size={30}
+            onClick={() => handleDeleteAll()}
+          />
+        </StyledDiv>
       </StyledDiv>
 
-      <StyledDiv BG="whiteSmoke" >{component}</StyledDiv>
+      <StyledDiv BG="whiteSmoke">{component}</StyledDiv>
     </StyledDiv>
   );
 }
 
 export default Header;
- 
