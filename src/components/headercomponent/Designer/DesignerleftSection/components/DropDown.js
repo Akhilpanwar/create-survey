@@ -1,8 +1,13 @@
-import React, { useState, useRef } from "react";
-import { StyledDiv, StyledInput, SurveyInput } from "../../../../Header/styles";
+import React, { useState } from "react";
+import {
+  StyledDiv,
+  StyledInput,
+  SurveyInput,
+  Input,
+} from "../../../../Header/styles";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   AddRadio,
   RadioShowOther,
@@ -45,7 +50,10 @@ function DropDown({ items, PageIndex, elementIndex }) {
       <StyledDiv DP="flex" HG="3rem" style={{ minWidth: "100%" }}>
         <StyledInput
           DP="flex"
-          style={{ minWidth: "100%"  ,boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)" }}
+          style={{
+            minWidth: "100%",
+            boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
+          }}
           OT="1px solid white"
           BG="whiteSmoke"
           BD="none"
@@ -53,82 +61,78 @@ function DropDown({ items, PageIndex, elementIndex }) {
           disabled
         ></StyledInput>
       </StyledDiv>
-      {items.Choices.map((item, index) => {
-        return (
-          <StyledDiv>
-            <StyledDiv
-              DP="flex"
-              AI="center"
-              BD="1px solid lightgrey"
-              BR="22px"
-              MBS="1rem"
+      <StyledDiv MBS="2rem" MIS="1rem">
+        {items.Choices.map((item, index) => {
+          return (
+            <StyledDiv>
+              <StyledDiv
+                DP="flex"
+                AI="center"
+                BD="1px solid lightgrey"
+                BR="22px"
 
-              //   onDragOver={(e) => handleDragOver(e, index)}
-              //   onDragEnter={(e) => handleDragEnter(e, index)}
-              //   onDrop={(e) => handleDrop(e)}
-              //   onDrag={(e) => handleDrag(e, index)}
-              //   onDragEnd={(e) => handleDragEnd(e)}
-              //   draggable
-            >
-              <StyledDiv DP="flex">
-                <IoIosRemoveCircle
-                  size={20}
-                  color="red"
-                  onClick={() => handleRemove(PageIndex, elementIndex, index)}
-                />
+                //   onDragOver={(e) => handleDragOver(e, index)}
+                //   onDragEnter={(e) => handleDragEnter(e, index)}
+                //   onDrop={(e) => handleDrop(e)}
+                //   onDrag={(e) => handleDrag(e, index)}
+                //   onDragEnd={(e) => handleDragEnd(e)}
+                //   draggable
+              >
+                <StyledDiv DP="flex">
+                  <IoIosRemoveCircle
+                    size={20}
+                    color="red"
+                    onClick={() => handleRemove(PageIndex, elementIndex, index)}
+                  />
 
-                <StyledDiv DP="flex"   >
-                  <StyledInput
-                    style={{
-                      display: "flex",
-                   
-                      width: "calc(3 * var(--base-unit, 8px))",
-                      height: "calc(3 * var(--base-unit, 8px))",
-                      boxSizing: "border-box",
-                      background: "whiteSmoke",
-                      boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
-                      flexShrink: "0",
-                    }}
-                    JC="center"
-                    BR="12px"
-                    BD="none"
-                    ML="12px"
-                    disabled
+                  <StyledDiv DP="flex">
+                    <StyledInput
+                      style={{
+                        display: "flex",
+
+                        width: "calc(3 * var(--base-unit, 8px))",
+                        height: "calc(3 * var(--base-unit, 8px))",
+                        boxSizing: "border-box",
+                        background: "whiteSmoke",
+                        boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
+                        flexShrink: "0",
+                      }}
+                      JC="center"
+                      BR="12px"
+                      BD="none"
+                      ML="12px"
+                      disabled
+                    />
+                  </StyledDiv>
+                </StyledDiv>
+                <StyledDiv DP="flex" MIS=".5rem">
+                  <Input
+                    DP="flex"
+                    contentEditable="true"
+                    WW="break-word"
+                    WB="break-word"
+                    placeholder={item}
+                    style={{ fontWeight: "200" }}
+                    BR="20px"
+                    FBR="calc(.5 * var(--base-unit, 8px))"
+                    OT="none"
+                    FOT="3px solid rgb(25, 179, 148)"
                   />
                 </StyledDiv>
               </StyledDiv>
-              <StyledDiv DP="flex">
-                <SurveyInput
-                  DP="flex"
-                  contentEditable="true"
-                  WW="break-word"
-                  WB="break-word"
-                  placeholder={item}
-                  BR="20px"
-                  FBR="calc(.5 * var(--base-unit, 8px))"
-                  OT="none"
-                  FOT="3px solid rgb(25, 179, 148)"
-                />
-              </StyledDiv>
             </StyledDiv>
-          </StyledDiv>
-        );
-      })}
-      <StyledDiv DP="flex">
-        <StyledDiv
-          DP="flex"
-          AI="center"
-          BD="1px solid lightgrey"
-          BR="22px"
-          MBS="1rem"
-        >
+          );
+        })}
+      </StyledDiv>
+      <StyledDiv DP="flex" MIS="1rem">
+        <StyledDiv DP="flex" AI="center" BD="1px solid lightgrey" BR="22px">
           <StyledDiv DP="flex">
             <IoIosAddCircle
               color="rgb(25, 179, 148)"
               size={20}
               onClick={() => handleAdd(PageIndex, elementIndex, num)}
             />
-            <StyledDiv Dp="flex">
+            <StyledDiv DP="flex">
               <StyledInput
                 style={{
                   display: "flex",
@@ -149,13 +153,14 @@ function DropDown({ items, PageIndex, elementIndex }) {
               />
             </StyledDiv>
           </StyledDiv>
-          <StyledDiv DP="flex">
+          <StyledDiv DP="flex" MIS=".5rem">
             <SurveyInput
               DP="flex"
               contentEditable="true"
               OW="break-word"
               WW="break-word"
               WB="break-word"
+              style={{ fontWeight: "200" }}
               placeholder={`Item${num + 1} `}
               BR="20px"
               FBR="calc(.5 * var(--base-unit, 8px))"
@@ -166,11 +171,13 @@ function DropDown({ items, PageIndex, elementIndex }) {
         </StyledDiv>
       </StyledDiv>
 
-      <StyledDiv DP="flex"
-          AI="center"
-          BD="1px solid lightgrey"
-          BR="22px"
-          MBS="1rem">
+      <StyledDiv
+        DP="flex"
+        AI="center"
+        BD="1px solid lightgrey"
+        BR="22px"
+        MIS="1rem"
+      >
         <StyledDiv DP="flex">
           {items.showNoneItem ? (
             <IoIosAddCircle
@@ -206,11 +213,12 @@ function DropDown({ items, PageIndex, elementIndex }) {
             />
           </StyledDiv>
 
-          <StyledDiv DP="flex">
+          <StyledDiv DP="flex" MIS=".5rem">
             <SurveyInput
               DP="flex"
               contentEditable={items.showNoneItem ? "false" : "true"}
               OW="none"
+              style={{ fontWeight: "200" }}
               WW="break-word"
               WB="break-word"
               placeholder="none"
@@ -225,7 +233,7 @@ function DropDown({ items, PageIndex, elementIndex }) {
 
       <StyledDiv DP="flex">
         <StyledDiv DP="flex">
-          <StyledDiv DP="flex">
+          <StyledDiv DP="flex" MIS="1rem">
             {items.showOtherItem ? (
               <IoIosAddCircle
                 size={20}
@@ -260,13 +268,14 @@ function DropDown({ items, PageIndex, elementIndex }) {
               />
             </StyledDiv>
           </StyledDiv>
-          <StyledDiv>
+          <StyledDiv DP="flex" MIS=".5rem">
             <SurveyInput
               DP="flex"
               contentEditable={items.showOtherItem ? "false" : "true"}
               OW="none"
               WW="break-word"
               WB="break-word"
+              style={{ fontWeight: "200" }}
               placeholder="Others(Describe)"
               BR="20px"
               FBR="calc(.5 * var(--base-unit, 8px))"

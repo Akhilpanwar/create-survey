@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React from "react";
 import {
   StyledDiv,
   SurveyInput,
@@ -16,21 +16,31 @@ import {
   AddQuestions,
   DeletePages,
   DeleteQuestion,
+  changePageTitle,
+  changePageDescription,
+  ChangeSurveyName,
+  changeSurveyDescription,
+  DuplicateQuestion,
 } from "../../../Redux/pageSlice";
 import { BsImage } from "react-icons/bs";
 import {
   addIndex,
   AddQuestionId,
   DeletePageQuestionId,
-  DeleteQuestionId,
   AddPageId,
   DeletePageId,
+  setPageId,
 } from "../../../Redux/surveySlice";
 
 function Pages() {
   const Dispatch = useDispatch();
   const Qn = useSelector((state) => state.surveyReducer.QuestionId);
   const pages = useSelector((state) => state.PageReducer[0].Pages);
+
+  const SurveyName = useSelector((state) => state.PageReducer[0].title);
+  const SurveyDescription = useSelector(
+    (state) => state.PageReducer[0].description
+  );
 
   const Pn = useSelector((state) => state.surveyReducer.PageId);
   const handleQuestion = (e, PageIndex, text, Qn) => {
@@ -45,6 +55,7 @@ function Pages() {
   };
   const handleDuplicatePages = (page, Qn, Pn) => {
     console.log("i clicked");
+
     let temp = [];
 
     page.elements.map((it, i) => {
@@ -52,6 +63,7 @@ function Pages() {
 
       temp.push({
         name: `question${+Qn}`,
+        title: it.title,
         type: it.type,
         Choices: it.Choices,
 
@@ -67,21 +79,30 @@ function Pages() {
       name: `Page${+Pn}`,
       elements: [...temp],
     });
-
-    Dispatch(DuplicatePages(newPage));
-
     Dispatch(AddPageId());
+    Dispatch(DuplicatePages(newPage));
   };
-  const handleDuplicateQuestion = () => {};
+  const handleDuplicateQuestion = (item, PageIndex) => {
+    const it = Object.assign({}, item, {
+      name: `question${+Qn}`,
+    });
+
+    Dispatch(DuplicateQuestion({ it, PageIndex }));
+    Dispatch(AddQuestionId());
+  };
 
   const handleDeletePages = (page, pageIndex) => {
+    // Dispatch(AddQuestionId())
+    console.log(pages);
+    Dispatch(DeletePages(pageIndex));
+    if (pages.length <= 1) {
+      Dispatch(setPageId());
+    }
     Dispatch(DeletePageQuestionId(page.elements.length));
-    Dispatch(DeletePages({ page, pageIndex }));
     Dispatch(DeletePageId());
   };
-  const handleDeleteQuestions = (e, DeletedIndex, index) => {
-    Dispatch(DeleteQuestionId());
-    Dispatch(DeleteQuestion({ DeletedIndex, index }));
+  const handleDeleteQuestions = (PageIndex, elementIndex) => {
+    Dispatch(DeleteQuestion({ PageIndex, elementIndex }));
   };
   const handleIconMouseover = (e) => {
     e.target.style.color = "var(--primary, #19b394)";
@@ -89,6 +110,22 @@ function Pages() {
 
   const handleClick = (pageIndex) => {
     Dispatch(addIndex(pageIndex));
+  };
+  const handlePageTitle = (e, pageIndex) => {
+    const title = e.target.innerText;
+    Dispatch(changePageTitle({ pageIndex, title }));
+  };
+  const handlePageDescription = (e, pageIndex) => {
+    const value = e.target.innerText;
+    Dispatch(changePageDescription({ value, pageIndex }));
+  };
+  const handleSurveyName = (e) => {
+    const title = e.target.innerText;
+    Dispatch(ChangeSurveyName(title));
+  };
+  const handleSurveyDescription = (e) => {
+    const description = e.target.innerText;
+    Dispatch(changeSurveyDescription(description));
   };
   return (
     <StyledDiv
@@ -112,8 +149,9 @@ function Pages() {
               <StyledDiv DP="flex">
                 <SurveyInput
                   DP="flex"
-                  placeholder="survey Title"
+                  placeholder={SurveyName ? `${SurveyName}` : "survey Title"}
                   contentEditable="true"
+                  onInput={(e) => handleSurveyName(e)}
                   FWD="fit-content"
                   FS="44px"
                   PTC="44px"
@@ -145,8 +183,16 @@ function Pages() {
                 DP="flex"
                 PTC="20px"
                 FS="20px"
+                style={{
+                  fontFamily:
+                    "var(--font-family, , Helvetica, Arial, sans-serif)",
+                  fontWeight: "normal",
+                }}
                 contentEditable="true"
-                placeholder="description"
+                placeholder={
+                  SurveyDescription ? `${SurveyDescription}` : "description"
+                }
+                onInput={(e) => handleSurveyDescription(e)}
                 OT="none"
                 FBG="white"
                 FOT="3px solid rgb(25, 179, 148)"
@@ -163,7 +209,7 @@ function Pages() {
             <BottomBorder></BottomBorder>
           </StyledDiv>
           <StyledDiv style={{ minHeight: "100%" }}>
-            {pages.map((page, pageIndex) => {
+            {pages?.map((page, pageIndex) => {
               return (
                 <StyledDiv
                   onClick={() => handleClick(pageIndex)}
@@ -216,7 +262,10 @@ function Pages() {
                           DP="flex"
                           FS="35px"
                           contentEditable="true"
-                          placeholder={`${page.name}`}
+                          placeholder={
+                            !page.title ? `${page.name}` : `${page.title}`
+                          }
+                          onInput={(e) => handlePageTitle(e, pageIndex)}
                           OT="none"
                           FBG="white"
                           FOT="2px solid rgb(25, 179, 148)"
@@ -230,10 +279,22 @@ function Pages() {
                     </StyledDiv>
                     <StyledDiv>
                       <SurveyInput
-                        FS="18px"
+                        PFC="20px"
+                        DP="flex"
+                        FS="20px"
+                        style={{
+                          fontFamily:
+                            "var(--font-family, , Helvetica, Arial, sans-serif)",
+                          fontWeight: "normal",
+                        }}
                         role="textBox"
                         contentEditable="true"
-                        placeholder="Description"
+                        placeholder={
+                          !page.description
+                            ? "description"
+                            : `${page.description}`
+                        }
+                        onInput={(e) => handlePageDescription(e, pageIndex)}
                         OT="none"
                         FBG="white"
                         FOT="3px solid rgb(25, 179, 148)"

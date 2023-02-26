@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyledDiv, StyledButton, Heading } from "../../Header/styles";
 import Pages from "./centersectiondata/Pages";
 import { useSelector, useDispatch } from "react-redux";
-import { AddQuestions, Questions } from "../../Redux/pageSlice";
+import { AddQuestions} from "../../Redux/pageSlice";
 import { survey } from "../../Header/survey";
 import MyDropdown from "./centersectiondata/dropdown";
 import { AddQuestionId } from "../../Redux/surveySlice";
@@ -35,7 +35,7 @@ const ind=useSelector((state)=>state.surveyReducer.index);
     Dispatch(AddQuestions({ PageIndex, element }));
 
    
- Dispatch(AddQuestionId());
+ Dispatch(AddQuestionId())  
 
   }
   return (
@@ -74,6 +74,7 @@ const ind=useSelector((state)=>state.surveyReducer.index);
                 HG="3rem"
                 BSS="2px 2px 2px 2px lightgrey"
                 HOT="3px solid rgb(25, 179, 148)"
+
                 onClick={(e) => handleQuestion(e, PageIndex, text, Qn)}
               >
                 Add Question

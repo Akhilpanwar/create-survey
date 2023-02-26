@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Delete, StyledDiv, StyledSpan } from "./styles";
+import React, { useState } from "react";
+import { StyledDiv, StyledSpan } from "./styles";
 
 import Designer from "../headercomponent/Designer/Designer";
 import Logic from "../headercomponent/Logic/Logic";
@@ -28,7 +28,7 @@ function Header() {
   const [lastIndex, setLastIndex] = useState(6);
 
   const [component, setComponent] = useState(<Designer />);
-  const page = useSelector((state) => state.PageReducer[0].Pages[0].elements);
+  const page = useSelector((state) => state.PageReducer[0].Pages);
 
   const handleClick = (item, item5, item4, item3, item2, item1, item0) => {
     switch (item.title || item4 || item5 || item3 || item2 || item1 || item0) {
@@ -125,7 +125,7 @@ function Header() {
         </DropdownButton>
         <StyledDiv DP="flex" AS="end" PB="8px" PT="10px" WD="20%" JC="center">
           <BiEraser
-            color={!page.length > 0 ? "grey" : ""}
+            color={page.length > 0 ? "grey" : ""}
             size={30}
             onClick={() => handleDeleteAll()}
           />

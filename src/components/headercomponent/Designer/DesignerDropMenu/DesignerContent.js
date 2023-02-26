@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { StyledDiv,StyledButton,StyledLI } from "../../../Header/styles";
+import React from "react";
+import { StyledDiv, StyledButton, StyledLI } from "../../../Header/styles";
 
 const DesignerContent = ({ faq, onToggle, active }) => {
   const { question, answer } = faq;
 
-  return(
-    <StyledLI BG="whiteSmoke" ML="-32px"   >
+  return (
+    <StyledLI BG="whiteSmoke" ML="-32px">
       <StyledButton
-        
         ABG="lightgrey"
         HBG="whiteSmoke"
         BG="white"
@@ -15,7 +14,7 @@ const DesignerContent = ({ faq, onToggle, active }) => {
         FS="18px"
         PD="15px"
         BS="none"
-        TA="left" 
+        TA="left"
         BB="1px solid darkGrey!important"
         FBG="white"
         TC="grey"
@@ -25,7 +24,7 @@ const DesignerContent = ({ faq, onToggle, active }) => {
       >
         {question}
       </StyledButton>
-      <StyledDiv  DP={active?"show":"none"}>
+      <StyledDiv DP={active ? "show" : "none"}>
         <StyledDiv>{answer}</StyledDiv>
       </StyledDiv>
     </StyledLI>

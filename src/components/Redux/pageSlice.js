@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { original } from "immer";
+
 
 const i = 1;
-const myArr=[  
- 
-    {
-      name: `Page${i}`,
+const myArr = [
+  {
+    name: `Page${i}`,
 
-      elements: [],
-    },
-  ]
+    elements: [],
+  },
+];
 
 const initialState = [
   {
@@ -26,42 +27,94 @@ const pageSlice = createSlice({
   name: "Pages",
   initialState,
   reducers: {
-    changeElement(state=initialState,action){
-      console.log(action.payload.v)
-state[0].Pages[action.payload.PageIndex].elements[action.payload.elementIndex].name=action.payload.v
+    ChangeSurveyName(state = initialState, action) {
+      state[0].title = action.payload;
+    },
+    changePageTitle(state = initialState, action) {
+      state[0].Pages[action.payload.pageIndex].title = action.payload.title;
+    },
+    changeSurveyDescription(state = initialState, action) {
+      state[0].description = action.payload;
+    },
+    changePageDescription(state = initialState, action) {
+      state[0].Pages[action.payload.pageIndex].description =
+        action.payload.value;
+    },
+    changeQuestionTitle(state = initialState, action) {
+      state[0].Pages[action.payload.PageIndex].elements[
+        action.payload.elementIndex
+      ].title = action.payload.value;
+    },
+    changeElement(state = initialState, action) {
+      console.log(action.payload.v);
+      state[0].Pages[action.payload.PasgeIndex].elements[
+        action.payload.elementIndex
+      ].name = action.payload.v;
     },
     DeleteAll(state = initialState, action) {
-     state[0].Pages.splice(0 ,state[0].Pages.length)
-     state[0].Pages.push(...myArr)
+      state[0].Pages.splice(0, state[0].Pages.length);
+      state[0].Pages.push(...myArr);
     },
     AddQuestions(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements.push(
         action.payload.element
       );
     },
-DropQuestions(state=initialState,action){
-  state[0].Pages[action.payload.PageIndex].elements.push(
-    action.payload.element
-  );
-},
+    DropQuestions(state = initialState, action) {
+      state[0].Pages[action.payload.PageIndex].elements.push(
+        action.payload.element
+      );
+    },
     changeType(state = initialState, action) {
-     
-      state[0].Pages[action.payload.PageIndex].elements.splice(action.payload.ElementIndex,1,action.payload.v)
+      state[0].Pages[action.payload.PageIndex].elements.splice(
+        action.payload.elementIndex,
+        1,
+        action.payload.v
+      );
+    },
+    changeRadioContent(state = initialState, action) {
+      state[0].Pages[action.payload.PageIndex].elements[
+        action.payload.elementIndex
+      ].Choices[action.payload.index] = action.payload.v;
+    },
+
+    checkRadio(state = initialState, action) {
+      console.log(action.payload);
+      let temp = [];
+      state[0].Pages[action.payload.PageIndex].elements[
+        action.payload.elementIndex
+      ].Choices.map((item, index) => {
+        console.log(item, index);
+        temp.push({
+          [item]: false,
+        });
+      });
+      console.log(temp);
+    },
+    DuplicateQuestion(state = initialState, action) {
+      state[0].Pages[action.payload.PageIndex].elements.push(action.payload.it);
     },
     DeleteQuestion(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements.splice(
-        action.payload.ElementIndex,
+        action.payload.elementIndex,
         1
       );
     },
-
+    RequiredQuestion(state = initialState, action) {
+      state[0].Pages[action.payload.PageIndex].elements[
+        action.payload.elementIndex
+      ].isRequired = action.payload.v;
+    },
     DuplicatePages(state = initialState, action) {
       const newPage = structuredClone(action.payload);
 
       state[0].Pages.push({ ...newPage });
     },
     DeletePages(state = initialState, action) {
-      state[0].Pages[action.payload.PageIndex].filter(action.payload);
+      state[0].Pages.splice(action.payload, 1);
+      if (state[0].Pages.length === 0) {
+        state[0].Pages.push(...myArr);
+      }
     },
     //radio actions===================================
     AddRadio(state = initialState, action) {
@@ -85,7 +138,7 @@ DropQuestions(state=initialState,action){
         action.payload.elementIndex
       ].showNoneItem = action.payload.value;
     },
-    // what is what?
+
     SelectShow(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements[
         action.payload.elementIndex
@@ -97,18 +150,21 @@ DropQuestions(state=initialState,action){
       ].rateMax = action.payload.val;
     },
     AddImage(state = initialState, action) {
-      console.log("========", action.payload);
-
-      state[0].Pages[action.payload.PageIndex].elements[
-        action.payload.elementIndex
-      ].Choices.push({
+      state[0].Pages[action.payload.P].elements[action.payload.E].Choices.push({
+        imageLink: action.payload.fileString,
+      });
+    },
+    ChangeImage(state = initialState, action) {
+      state[0].Pages[action.payload.P].elements[
+        action.payload.E
+      ].Choices.splice(action.payload.I, 1, {
         imageLink: action.payload.fileString,
       });
     },
     DeleteImage(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements[
-        action.payload.ElementIndex
-      ].choices.pop();
+        action.payload.elementIndex
+      ].Choices.splice(action.payload.ind, 1);
     },
     AddRank(state = initialState, action) {
       state[0].Pages[action.payload.PageIndex].elements[
@@ -121,10 +177,24 @@ DropQuestions(state=initialState,action){
         action.payload.elementIndex
       ].Choices.splice(action.payload.ind, 1);
     },
+    changeBooleanYes(state = initialState, action) {},
+    changeBooleanNo(state = initialState, action) {},
   },
 });
 
 export const {
+  RequiredQuestion,
+  checkRadio,
+  changeRadioContent,
+  ChangeImage,
+  DuplicateQuestion,
+  changeBooleanYes,
+  changeBooleanNo,
+  changeSurveyDescription,
+  ChangeSurveyName,
+  changePageDescription,
+  changeQuestionTitle,
+  changePageTitle,
   DropQuestions,
   changeElement,
   DeleteAll,

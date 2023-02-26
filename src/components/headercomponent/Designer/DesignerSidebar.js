@@ -1,4 +1,4 @@
-import React, { useRef,useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyledDiv,
   StyledLi,
@@ -8,13 +8,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { AddQuestionId,DragElement } from "../../Redux/surveySlice";
+import { AddQuestionId, DragElement } from "../../Redux/surveySlice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AddQuestions } from "../../Redux/pageSlice";
 
 import { survey } from "../../Header/survey";
 function DesignerSidebar() {
-  const [value,setValue]=useState(true)
+  const [value, setValue] = useState(true);
   const Form = survey[0].content[0].forms;
   const PageIndex = useSelector((state) => state.surveyReducer.index);
   const Qn = useSelector((state) => state.surveyReducer.QuestionId);
@@ -31,31 +31,28 @@ function DesignerSidebar() {
   };
 
   const handleDrag = (item, PageIndex, Qn) => {
-    setValue(false)
-const element=item.data
- Dispatch(DragElement({element,PageIndex,Qn}))
+    setValue(false);
+    const element = item.data;
+    Dispatch(DragElement({ element, PageIndex, Qn }));
   };
-  const handleDragEnd=()=>{
-
-  }
+  const handleDragEnd = () => {};
   return (
     <StyledDiv>
       <StyledUl DP="flex" FD="column" JC="space-evenly">
         {Form.slice(0, 11).map((item, ind) => {
           return (
             <StyledLi
-            
-              style={{ marginBottom: ".8rem",visibility:"visible" }}
-              WD="max-content"
+              style={{ marginBottom: ".8rem", visibility: "visible" }}
+              WD="150px"
               BR="24px"
               WS="nowrap"
               HBG="white"
               HBS="0px 2px 6px rgb(0 0 0 / 10%)"
-               BG={value?"":"lightgrey"}
+              BG={value ? "" : "lightgrey"}
               onClick={() => handleClick(item, PageIndex, Qn)}
               onDragStart={(e) => handleDrag(item, PageIndex, Qn)}
-              onDragEnd={()=>handleDragEnd()}
-              draggable 
+              onDragEnd={() => handleDragEnd()}
+              draggable
             >
               <b>{item.icons}</b>
 
@@ -88,9 +85,9 @@ const element=item.data
                       className="dropItem"
                       href="#/action-1"
                     >
-                    <b>{item.icons}</b>
+                      <b>{item.icons}</b>
 
-<i>{item.title}</i>
+                      <i>{item.title}</i>
                     </Dropdown.Item>
                   </StyledDiv>
                 );
@@ -114,9 +111,9 @@ const element=item.data
                       onClick={(e) => handleClick(e, PageIndex, Qn)}
                       href="#/action-1"
                     >
-                        <b>{item.icons}</b>
+                      <b>{item.icons}</b>
 
-<i>{item.title}</i>
+                      <i>{item.title}</i>
                     </Dropdown.Item>
                   </StyledDiv>
                 );
@@ -140,9 +137,9 @@ const element=item.data
                       className="dropItem"
                       href="#/action-1"
                     >
-                     <b>{item.icons}</b>
+                      <b>{item.icons}</b>
 
-<i>{item.title}</i>
+                      <i>{item.title}</i>
                     </Dropdown.Item>
                   </StyledDiv>
                 );
@@ -161,15 +158,14 @@ const element=item.data
                       height: "4rem",
                     }}
                   >
-                    {" "}
                     <Dropdown.Item
                       onClick={(e) => handleClick(e, PageIndex, Qn)}
                       className="dropItem"
                       href="#/action-1"
                     >
-                        <b>{item.icons}</b>
+                      <b>{item.icons}</b>
 
-<i>{item.title}</i>
+                      <i>{item.title}</i>
                     </Dropdown.Item>
                   </StyledDiv>
                 );

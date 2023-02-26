@@ -1,26 +1,44 @@
-
-
 import {
   StyledDiv,
   Heading,
-  StyledInput,DataButton,CheckBox
+  StyledInput,
+  DataButton,
+  CheckBox,
 } from "../../../Header/styles";
 
 export const Content = [
   {
     question: "General",
     answer: (
-      <StyledDiv PD="30px"  >
+      <StyledDiv PD="30px">
         <Heading TC="grey" FS="15px" FBC="white" C="white">
           Heading
         </Heading>
-        <StyledInput WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
-       <Heading TC="grey" FS="15px">
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
+        <Heading TC="grey" FS="15px">
           Description
         </Heading>
         <span></span>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Editable or Read-only
         </Heading>
@@ -31,7 +49,13 @@ export const Content = [
         <Heading TC="grey" FS="15px">
           Cookie name
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Width mode
         </Heading>
@@ -54,15 +78,33 @@ export const Content = [
         <Heading TC="grey" FS="15px">
           Logo(URL or base64-encoded string)
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Logo width(in CSS-accepted values)
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Logo height(in CSS-accepted values)
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Logo fit
         </Heading>
@@ -82,35 +124,83 @@ export const Content = [
         <Heading TC="grey" FS="15px">
           Preview answer before submitting the survey
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Previous Page button text
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Next Page button text
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Complete Survey button text
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Preview Answers button text
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Edit Answers button text
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Start Survey button text
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Navigation buttons Location
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <StyledDiv DP="block">
           <CheckBox type="checkbox"></CheckBox>
           <CheckBox type="checkbox"></CheckBox>
@@ -128,12 +218,23 @@ export const Content = [
         <Heading TC="grey" FS="15px">
           Progress Bar type
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
-    
           Survey structure
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
       </StyledDiv>
     ),
   },
@@ -144,25 +245,54 @@ export const Content = [
         <Heading TC="grey" FS="15px">
           Question Title Location
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           {" "}
           Question Description Location
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
-       
           Question numbering
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Question Title Pattern
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Required Symbol(s)
         </Heading>
-        <StyledInput  WD="100%" HG="40px" BD="1px solid lightgrey" OT="none" FBD="3px solid rgb(25, 179, 148)"></StyledInput>
+        <StyledInput
+          WD="100%"
+          HG="40px"
+          BD="1px solid lightgrey"
+          OT="none"
+          FBD="3px solid rgb(25, 179, 148)"
+        ></StyledInput>
         <Heading TC="grey" FS="15px">
           Start index(number or letter)
         </Heading>
@@ -221,11 +351,11 @@ export const Content = [
         <StyledInput></StyledInput>
         <StyledDiv DP="flex">
           <CheckBox type="checkbox" DP="flex"></CheckBox>
-          <Heading TC="grey" FS="15px" >
+          <Heading TC="grey" FS="15px">
             show Pages titles
           </Heading>
-          </StyledDiv>
-          <StyledDiv DP="flex">
+        </StyledDiv>
+        <StyledDiv DP="flex">
           <CheckBox type="checkbox" DP="flex"></CheckBox>
           <Heading TC="grey" FS="15px">
             Show Pages Number
@@ -238,9 +368,13 @@ export const Content = [
     question: "Logic",
     answer: (
       <>
-        <Heading TC="grey" FS="15px">Heading</Heading>
+        <Heading TC="grey" FS="15px">
+          Heading
+        </Heading>
         <StyledInput></StyledInput>
-        <Heading TC="grey" FS="15px">Description</Heading>
+        <Heading TC="grey" FS="15px">
+          Description
+        </Heading>
         <StyledInput></StyledInput>
       </>
     ),
@@ -252,16 +386,16 @@ export const Content = [
         <Heading>CLear invisible values</Heading>
         <StyledInput></StyledInput>
         <Heading>Update text Question value</Heading>
-     <DataButton>on blur</DataButton>
-     <DataButton> while typing</DataButton>
-     <StyledDiv>
-      <CheckBox type="checkbox"></CheckBox>
-     <Heading>save partial survey results in progress</Heading>
-     </StyledDiv>
-     <StyledDiv>
-      <CheckBox type="checkbox"></CheckBox>
-     <Heading>save partial survey results in progress</Heading>
-     </StyledDiv>
+        <DataButton>on blur</DataButton>
+        <DataButton> while typing</DataButton>
+        <StyledDiv>
+          <CheckBox type="checkbox"></CheckBox>
+          <Heading>save partial survey results in progress</Heading>
+        </StyledDiv>
+        <StyledDiv>
+          <CheckBox type="checkbox"></CheckBox>
+          <Heading>save partial survey results in progress</Heading>
+        </StyledDiv>
       </StyledDiv>
     ),
   },
@@ -269,15 +403,13 @@ export const Content = [
     question: "Validation",
     answer: (
       <StyledDiv PD="30px">
-       <StyledDiv>
-      <CheckBox type="checkbox"></CheckBox>
-     <Heading>set focus on the first invalid answer</Heading>
-     </StyledDiv>
+        <StyledDiv>
+          <CheckBox type="checkbox"></CheckBox>
+          <Heading>set focus on the first invalid answer</Heading>
+        </StyledDiv>
         <Heading>run validation</Heading>
 
-        
         <StyledInput></StyledInput>
-    
       </StyledDiv>
     ),
   },
@@ -285,7 +417,7 @@ export const Content = [
     question: "SurveyComplete",
     answer: (
       <StyledDiv PD="30px">
-        <Heading >Navigate to URL</Heading>
+        <Heading>Navigate to URL</Heading>
         <StyledInput></StyledInput>
         <Heading>Survey Complete Page markup </Heading>
         <StyledInput></StyledInput>
@@ -293,17 +425,18 @@ export const Content = [
         <StyledInput></StyledInput>
         <Heading>Dynamic Survey Complete Page markup</Heading>
         <StyledInput></StyledInput>
-      <Heading>Markup to show if the user already filled out his survey </Heading>
-      <StyledInput></StyledInput>
+        <Heading>
+          Markup to show if the user already filled out his survey{" "}
+        </Heading>
+        <StyledInput></StyledInput>
       </StyledDiv>
-
     ),
   },
   {
     question: "Timer/Quiz",
     answer: (
       <StyledDiv PD="30px">
-        <Heading >Time Limit to finish the survey(in seconds )</Heading>
+        <Heading>Time Limit to finish the survey(in seconds )</Heading>
         <StyledInput></StyledInput>
         <Heading>Time Limit to finish one page</Heading>
         <StyledInput></StyledInput>
@@ -319,8 +452,6 @@ export const Content = [
           <DataButton>Page</DataButton>
           <DataButton>Survey</DataButton>
         </StyledDiv>
-
-     
       </StyledDiv>
     ),
   },

@@ -17,6 +17,9 @@
   font: bold;
   outline: none;
 }
+.dropdown-toggle:after {
+  display: none;
+ }
 
 .draggable {
   border-radius: 4px;
@@ -120,4 +123,16 @@
   #sixthDrop {
     display: flex;
   }
+}
+
+
+select {
+  background-image:none !important;
+
+ 
+  background-repeat: no-repeat;
+ 
+}
+select:hover{
+background:whitesmoke;
 }

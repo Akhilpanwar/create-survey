@@ -1,5 +1,11 @@
-import React, { useState, useRef } from "react";
-import { StyledDiv, StyledInput, SurveyInput } from "../../../../Header/styles";
+import React, { useState, useRef, useEffect } from "react";
+
+import {
+  StyledDiv,
+  StyledInput,
+  SurveyInput,
+  Input,
+} from "../../../../Header/styles";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,10 +14,15 @@ import {
   RadioShowOther,
   RadioShowNone,
   RemoveRadio,
+  changeRadioContent,
 } from "../../../../Redux/pageSlice";
-function RadioGroup({ items, PageIndex, elementIndex }) {
+
+function RadioGroup({ items, data, PageIndex, elementIndex, show }) {
   const [value, setValue] = useState(true);
   const [val, setVal] = useState(true);
+
+  const pg = useSelector((state) => state.PageReducer[0].Pages);
+
   const Dispatch = useDispatch();
   const num =
     items?.Choices?.length > 0 &&
@@ -19,7 +30,7 @@ function RadioGroup({ items, PageIndex, elementIndex }) {
 
   const handleAdd = (PageIndex, elementIndex, num) => {
     let ID = (num += 1);
-   
+
     Dispatch(AddRadio({ PageIndex, elementIndex, ID }));
   };
   const handleRemove = (PageIndex, elementIndex, index) => {
@@ -41,45 +52,148 @@ function RadioGroup({ items, PageIndex, elementIndex }) {
     Dispatch(RadioShowOther({ PageIndex, elementIndex, val }));
     setVal(!val);
   };
+  const handleChange = (e, PageIndex, elementIndex, index) => {
+    const v = e.target.innerText;
+
+    Dispatch(changeRadioContent({ PageIndex, elementIndex, index, v }));
+  };
+  const handleChangeCheck = (item, items) => {
+    const name = items.name;
+    const Choice = item;
+  };
   return (
-    <StyledDiv DP="flex" FD="column">
-     
+    <StyledDiv DP="flex" FD="column" AI="baseline">
       {items.Choices.map((item, index) => {
         return (
-          <StyledDiv DP="flex" >
-          
-              <StyledDiv DP="flex">
+          <StyledDiv DP="flex" AI="baseline">
+            <StyledDiv DP="flex" FD="row" MIE=".5rem">
+              {show === true && (
                 <IoIosRemoveCircle
                   size={20}
                   color="red"
                   onClick={() => handleRemove(PageIndex, elementIndex, index)}
-                /></StyledDiv>
+                />
+              )}
+            </StyledDiv>
 
-                <StyledDiv DP="flex">
+            <StyledDiv DP="flex">
+              <StyledInput
+                style={{
+                  width: "calc(3 * var(--base-unit, 8px))",
+                  height: "calc(3 * var(--base-unit, 8px))",
+                }}
+                onChange={() => handleChangeCheck(item, items)}
+                type="Radio"
+                id={item}
+                Checked={data?.item === item ? "true" : "false"}
+                name="radioGroup"
+                value={item}
+                BD="none"
+                disabled={show}
+              />
+            </StyledDiv>
+
+            <StyledDiv DP="flex" MIS="1rem">
+              <Input
+                DP="flex"
+                contentEditable={show ? "true" : "false"}
+                WW="break-word"
+                WB="break-word"
+                style={{ fontWeight: "200", color: "black" }}
+                placeholder={!item.title ? item : item.title}
+                onChange={() => handleChange(items)}
+                BR="20px"
+                FBR="calc(.5 * var(--base-unit, 8px))"
+                OT="none"
+                FOT="3px solid rgb(25, 179, 148)"
+              />
+            </StyledDiv>
+          </StyledDiv>
+        );
+      })}
+
+      {show === true && (
+        <StyledDiv DP="flex" FD="column" AI="baseline">
+          <StyledDiv DP="flex">
+            <StyledDiv DP="flex">
+              <IoIosAddCircle
+                color="rgb(25, 179, 148)"
+                size={20}
+                onClick={() => handleAdd(PageIndex, elementIndex, num)}
+              />
+              <StyledDiv DP="flex" MIS=".5rem">
+                <StyledInput
+                  style={{
+                    display: "flex",
+
+                    width: "calc(3 * var(--base-unit, 8px))",
+                    height: "calc(3 * var(--base-unit, 8px))",
+
+                    flexShrink: "0",
+                  }}
+                  type="Radio"
+                  BD="none"
+                  disabled
+                />
+              </StyledDiv>
+            </StyledDiv>
+            <StyledDiv DP="flex" MIS="1rem">
+              <SurveyInput
+                DP="flex"
+                contentEditable="true"
+                OW="break-word"
+                WW="break-word"
+                WB="break-word"
+                placeholder={`Item${num + 1} `}
+                style={{ fontWeight: "200", color: "black" }}
+                BR="20px"
+                FBR="calc(.5 * var(--base-unit, 8px))"
+                OT="none"
+                FOT="3px solid rgb(25, 179, 148)"
+              />
+            </StyledDiv>
+          </StyledDiv>
+
+          <StyledDiv AI="baseline" DP="flex">
+            <StyledDiv DP="flex" JC="center">
+              <StyledDiv DP="flex">
+                {items.showNoneItem ? (
+                  <IoIosAddCircle
+                    size={20}
+                    color="rgb(25, 179, 148)"
+                    onClick={() =>
+                      handleAddNone(PageIndex, elementIndex, value)
+                    }
+                  />
+                ) : (
+                  <IoIosRemoveCircle
+                    size={20}
+                    color="red"
+                    onClick={() =>
+                      handleRemoveNone(PageIndex, elementIndex, value)
+                    }
+                  />
+                )}
+                <StyledDiv DP="flex" MIS=".5rem">
                   <StyledInput
                     style={{
-                      display: "flex",
-
                       width: "calc(3 * var(--base-unit, 8px))",
                       height: "calc(3 * var(--base-unit, 8px))",
-                      boxSizing: "border-box",
-                      background: "whiteSmoke",
-                      boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
-                      flexShrink: "0",
                     }}
-                    BR="12px"
-                    BD="none"
+                    type="Radio"
                     disabled
                   />
                 </StyledDiv>
-          
-              <StyledDiv DP="flex">
+              </StyledDiv>
+              <StyledDiv DP="flex" MIS="1rem">
                 <SurveyInput
                   DP="flex"
-                  contentEditable="true"
+                  style={{ fontWeight: "200", color: "black" }}
+                  contentEditable={items.showNoneItem ? "false" : "true"}
+                  OW="none"
                   WW="break-word"
                   WB="break-word"
-                  placeholder={item}
+                  placeholder="none"
                   BR="20px"
                   FBR="calc(.5 * var(--base-unit, 8px))"
                   OT="none"
@@ -87,163 +201,57 @@ function RadioGroup({ items, PageIndex, elementIndex }) {
                 />
               </StyledDiv>
             </StyledDiv>
-         
-        );
-      })}
-    
-      <StyledDiv DP="flex">
-        <StyledDiv DP="flex" >
-          
-            <IoIosAddCircle
-              color="rgb(25, 179, 148)"
-              size={20}
-              onClick={() => handleAdd(PageIndex, elementIndex, num)}
-            />
-            <StyledDiv DP="flex">
-              <StyledInput
-                style={{
-                  display: "flex",
+          </StyledDiv>
 
-                  justifyContent: "center",
-                  width: "calc(3 * var(--base-unit, 8px))",
-                  height: "calc(3 * var(--base-unit, 8px))",
-                  boxSizing: "border-box",
-                  background: "whiteSmoke",
-                  boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
-
-                  flexShrink: "0",
-                }}
-                BR="12px"
-                BD="none"
-                ML="12px"
-                disabled
-              />
+          <StyledDiv AI="center" DP="flex">
+            <StyledDiv DP="flex" JC="center">
+              <StyledDiv DP="flex">
+                {items.showOtherItem ? (
+                  <IoIosAddCircle
+                    size={20}
+                    color="rgb(25, 179, 148)"
+                    onClick={() => handleAddOther(PageIndex, elementIndex, val)}
+                  />
+                ) : (
+                  <IoIosRemoveCircle
+                    size={20}
+                    color="red"
+                    onClick={() =>
+                      handleRemoveOther(PageIndex, elementIndex, val)
+                    }
+                  />
+                )}
+                <StyledDiv DP="flex" MIS=".5rem">
+                  <StyledInput
+                    type="Radio"
+                    style={{
+                      width: "calc(3 * var(--base-unit, 8px))",
+                      height: "calc(3 * var(--base-unit, 8px))",
+                    }}
+                    disabled
+                  />
+                </StyledDiv>
+              </StyledDiv>
+              <StyledDiv DP="flex" MIS="1rem">
+                <SurveyInput
+                  DP="flex"
+                  PTC="grey"
+                  style={{ fontWeight: "200", color: "black" }}
+                  contentEditable={items.showOtherItem ? "false" : "true"}
+                  OW="none"
+                  WW="break-word"
+                  WB="break-word"
+                  placeholder="Others(Describe)"
+                  BR="20px"
+                  FBR="calc(.5 * var(--base-unit, 8px))"
+                  OT="none"
+                  FOT="3px solid rgb(25, 179, 148)"
+                />
+              </StyledDiv>
             </StyledDiv>
           </StyledDiv>
-          <StyledDiv DP="flex">
-            <SurveyInput
-              DP="flex"
-              contentEditable="true"
-              OW="break-word"
-              WW="break-word"
-              WB="break-word"
-              placeholder={`Item${num + 1} `}
-              BR="20px"
-              FBR="calc(.5 * var(--base-unit, 8px))"
-              OT="none"
-              FOT="3px solid rgb(25, 179, 148)"
-            />
-          </StyledDiv>
         </StyledDiv>
-                
-
-      <StyledDiv AI="center" DP="flex">
-        <StyledDiv DP="flex" JC="center">
-          <StyledDiv DP="flex">
-            {items.showNoneItem ? (
-              <IoIosAddCircle
-                size={20}
-                color="rgb(25, 179, 148)"
-                onClick={() => handleAddNone(PageIndex, elementIndex, value)}
-              />
-            ) : (
-              <IoIosRemoveCircle
-                size={20}
-                color="red"
-                onClick={() => handleRemoveNone(PageIndex, elementIndex, value)}
-              />
-            )}
-            <StyledDiv>
-              <StyledInput
-                style={{
-                  display: "flex",
-
-                  justifyContent: "center",
-                  width: "calc(3 * var(--base-unit, 8px))",
-                  height: "calc(3 * var(--base-unit, 8px))",
-                  boxSizing: "border-box",
-                  background: "whiteSmoke",
-                  boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
-
-                  flexShrink: "0",
-                }}
-                BR="12px"
-                BD="none"
-                ML="12px"
-                disabled
-              />
-            </StyledDiv>
-          </StyledDiv>
-          <StyledDiv DP="flex">
-            <SurveyInput
-              DP="flex"
-              contentEditable={items.showNoneItem ? "false" : "true"}
-              OW="none"
-              WW="break-word"
-              WB="break-word"
-              placeholder="none"
-              BR="20px"
-              FBR="calc(.5 * var(--base-unit, 8px))"
-              OT="none"
-              FOT="3px solid rgb(25, 179, 148)"
-            />
-          </StyledDiv>
-        </StyledDiv>
-      </StyledDiv>
-
-      <StyledDiv AI="center" DP="flex">
-        <StyledDiv DP="flex" JC="center">
-          <StyledDiv DP="flex">
-            {items.showOtherItem ? (
-              <IoIosAddCircle
-                size={20}
-                color="rgb(25, 179, 148)"
-                onClick={() => handleAddOther(PageIndex, elementIndex, val)}
-              />
-            ) : (
-              <IoIosRemoveCircle
-                size={20}
-                color="red"
-                onClick={() => handleRemoveOther(PageIndex, elementIndex, val)}
-              />
-            )}
-            <StyledDiv DP="flex">
-              <StyledInput
-                style={{
-                  display: "flex",
-
-                  justifyContent: "center",
-                  width: "calc(3 * var(--base-unit, 8px))",
-                  height: "calc(3 * var(--base-unit, 8px))",
-                  boxSizing: "border-box",
-                  background: "whiteSmoke",
-                  boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
-
-                  flexShrink: "0",
-                }}
-                BR="12px"
-                BD="none"
-                ML="12px"
-                disabled
-              />
-            </StyledDiv>
-          </StyledDiv>
-          <StyledDiv>
-            <SurveyInput
-              DP="flex"
-              contentEditable={items.showOtherItem ? "false" : "true"}
-              OW="none"
-              WW="break-word"
-              WB="break-word"
-              placeholder="Others(Describe)"
-              BR="20px"
-              FBR="calc(.5 * var(--base-unit, 8px))"
-              OT="none"
-              FOT="3px solid rgb(25, 179, 148)"
-            />
-          </StyledDiv>
-        </StyledDiv>
-      </StyledDiv>
+      )}
     </StyledDiv>
   );
 }

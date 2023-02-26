@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { useSelector } from 'react-redux';
+import React from "react";
+import {  useSelector } from 'react-redux';
 import { StyledDiv } from "../../Header/styles";
 import { survey } from "../../Header/survey";
-function Jsoneditor() {
-  
-  const data=useSelector((state)=>state.PageReducer[0].Pages);
 
-console.log(data)
+function Jsoneditor() {
+
+  const data=useSelector((state)=>state.PageReducer[0]);
+
+
 
 
   return (
