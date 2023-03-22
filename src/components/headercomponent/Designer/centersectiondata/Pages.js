@@ -30,6 +30,8 @@ import {
   AddPageId,
   DeletePageId,
   setPageId,
+  DeleteQuestionId,
+  addQuestionIndex,
 } from "../../../Redux/surveySlice";
 
 function Pages() {
@@ -66,7 +68,7 @@ function Pages() {
         title: it.title,
         type: it.type,
         Choices: it.Choices,
-
+        rateMax: it.rateMax,
         showOtherItem: it.showOtherItem,
         showSelectedAllItem: it.showSelectedAllItem,
         showNoneItem: it.showNoneItem,
@@ -92,7 +94,6 @@ function Pages() {
   };
 
   const handleDeletePages = (page, pageIndex) => {
-    // Dispatch(AddQuestionId())
     console.log(pages);
     Dispatch(DeletePages(pageIndex));
     if (pages.length <= 1) {
@@ -102,6 +103,7 @@ function Pages() {
     Dispatch(DeletePageId());
   };
   const handleDeleteQuestions = (PageIndex, elementIndex) => {
+    Dispatch(DeleteQuestionId());
     Dispatch(DeleteQuestion({ PageIndex, elementIndex }));
   };
   const handleIconMouseover = (e) => {
@@ -303,9 +305,10 @@ function Pages() {
                         WW="break-word"
                         WB="break-word"
                         FBR="3px"
+                        tabIndex={1234}  onClick={()=>Dispatch(addQuestionIndex(""))}
                       />
                     </StyledDiv>
-                    <StyledDiv>
+                    <StyledDiv  >
                       <Questionsdata
                         Page={page}
                         PageIndex={pageIndex}

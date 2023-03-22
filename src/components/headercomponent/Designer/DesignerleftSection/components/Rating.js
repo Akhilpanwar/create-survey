@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
-import { StyledDiv, Input } from "../../../../Header/styles";
+import {
+  StyledDiv,
+  Input,
+  StyledInput,
+  StyledRadio,
+} from "../../../../Header/styles";
 
 import { useDispatch } from "react-redux";
 import { AddRate } from "../../../../Redux/pageSlice";
+import { AddData } from "../../../../Redux/surveySlice";
 
 function Rating({ Rates, PageIndex, elementIndex, show }) {
   const item = Rates.rateMax;
@@ -26,219 +32,108 @@ function Rating({ Rates, PageIndex, elementIndex, show }) {
       Dispatch(AddRate({ PageIndex, elementIndex, val }));
     }
   };
+  const handleClick = (e,item) => {
+    const SelItem = item;
+    const Question = e.target.name;
+console.log(SelItem,Question)
+    Dispatch(AddData({ Question,SelItem }));
+  };
 
   return (
     <StyledDiv>
-    <StyledDiv DP="flex" AI="center" HG="100%" >
-    <StyledDiv DP="flex" FD="row" HG="100%" AS="baseline" JC="space-between" HG="100%" >
-      <StyledDiv DP="flex" AI="center" MIE="1rem"  style={{maxHeight:"100%" }}>
-        <IoIosRemoveCircle
-          size={30}
-          color="red"
-          onClick={() => handleRemove(PageIndex, elementIndex, items)}
-        />
-        <IoIosAddCircle
-          size={30}
-          color="rgb(25, 179, 148)"
-          onClick={() => handleAddRate(PageIndex, elementIndex, items)}
-        />
-      </StyledDiv >
-<StyledDiv DP="flex" HG="90%"  style={{flexWrap:"wrap",maxHeight:"100%" }} >
-      {items.map((item, index) => {
-        return (
-          <StyledDiv
-            DP="flex"
-          
-            MIE="1rem"
-            HG="100%"
-            AI="center"
-          
-            style={{ overflowX: "hidden", flexWrap: "wrap",maxHeight:"100%" }}>
-    
+      <StyledDiv DP="flex" AI="center" HG="100%">
+        <StyledDiv DP="flex" FD="row" HG="100%" AS="baseline">
+          {show === true && (
+            <StyledDiv DP="flex" FD="row" AI="center">
+              <IoIosRemoveCircle
+                size={30}
+                color="red"
+                onClick={() => handleRemove(PageIndex, elementIndex, items)}
+              />
+              <IoIosAddCircle
+                size={30}
+                color="rgb(25, 179, 148)"
+                onClick={() => handleAddRate(PageIndex, elementIndex, items)}
+              />
+            </StyledDiv>
+          )}
 
-             <Input
-              contentEditable="true"
-              role="textbox"
-              // OT="transparent"
-              FOT="3px solid rgb(25, 179, 148)"
-              FS="25px"
-         
-              OW="break-word"
-              WW="break-word"
-              WB="break-word"
-           
-              placeholder={item}
-              style={{
-               
-                alignItems:"center",
-                overflowX: "hidden",
-                maxWidth: "100%",
-                position:"relative",
-                cursor: "default",
-                textAlign: "center",
-                fontSize: "calc(2 * var(--base-unit, 8px))",
-                lineHeight: "calc(3 * var(--base-unit, 18px))",
-                minWidth: "calc(3 * var(--base-unit, 18px))",
-             
+          <StyledDiv DP="flex" FD="row" style={{ flexWrap: "wrap" }}>
+            {items.map((item, index) => {
+              return (
+                <StyledDiv DP="flex" FD="row" MIS="1rem" POT="relative">
+                  {show ? (
+                    <Input
+                      contentEditable={show ? true : false}
+                      FOT="3px solid rgb(25, 179, 148)"
+                      BR="222px"
+                      OT="none"
+                      FS="25px"
+                      OW="break-word"
+                      WW="break-word"
+                      WB="break-word"
+                      tabIndex={1234}
+                      JC="space-around"
+                      placeholder={item}
+                      style={{
+                        overflowX: "hidden",
+                        maxWidth: "100%",
+                        display: "flex",
+                        cursor: "default",
+                        textAlign: "center",
+                        fontSize: "calc(2 * var(--base-unit, 8px))",
+                        lineHeight: "calc(3 * var(--base-unit, 18px))",
+                        minWidth: "calc(3 * var(--base-unit, 18px))",
 
-                borderShadow: "12px 12px 12px 12px ",
+                        whiteSpace: "nowrap",
+                        background: "var(--background, #fff)",
+                        boxShadow: "0px 1px 2px rgb(0 0 0 / 15%)",
+                      }}
+                    ></Input>
+                  ) : (
+                    <StyledRadio
+                      ZI="8"
+                      for={item}
+                      value={Rates}
+                      tabIndex={1234}
+                      
+                    >
+                      {item}
+                    </StyledRadio>
+                   
+            )}
 
-                whiteSpace: "nowrap",
-                background: "var(--background, #fff)",
-                boxShadow: "0px 1px 2px rgb(0 0 0 / 15%)",
-                borderRadius: " calc(12.5 * var(--base-unit, 8px))",
-              }}
-            ></Input> 
-
-      
+                  {show === false && (
+                    <StyledInput
+                      type="radio"
+                      ZI="1"
+                      onClick={(e) => handleClick(e,item)}
+                      id={item}
+                      name={Rates.name}
+                      style={{
+                        justifyContent:"center",
+                        textAlign:"center",
+                        height: "52px",
+                  
+                     
+                    
+                        cursor: "default",
+                        fontSize: "calc(2 * var(--base-unit, 8px))",
+                        minWidth: "calc(3 * var(--base-unit, 18px))",
+                        position: "absolute",
+                        whiteSpace: "wrap",
+                        borderRadius: "calc(12.5 * var(--base-unit, 8px))",
+                      }}
+                    ></StyledInput>
+                  )}
+                </StyledDiv>
+              );
+            })}
           </StyledDiv>
-        );
-      })}
+        </StyledDiv>
       </StyledDiv>
-    </StyledDiv>
-    </StyledDiv>
     </StyledDiv>
   );
 }
 
 export default Rating;
-
-{
-  /* */
-}
-{
-  /* <SurveyInput
-role="textbox"
-type="radio"
-OT="transparent"
-FOT="3px solid rgb(25, 179, 148)"
-FS="25px"
-HG="3rem"
-OW="break-word"
-WW="break-word"
-WB="break-word"
-AI="baseline"
-style={{
-  overflowX: "hidden",
-  maxWidth: "100%  ",
-
-  flexWrap: "wrap",
-  cursor: "default",
-  textAlign: "center",
-  fontSize: "calc(2 * var(--base-unit, 8px))",
-  lineHeight: "calc(3 * var(--base-unit, 8px))",
-  minWidth: "calc(3 * var(--base-unit, 8px))",
-  wordSpacing: "3px",
-  display: "inline-block",
-  width: "3rem",
-  borderShadow: "12px 12px 12px 12px ",
- 
-  whiteSpace: "nowrap",
-  background: "var(--background, #fff)",
-  boxShadow: "0px 1px 2px rgb(0 0 0 / 15%)",
-  borderRadius: " calc(12.5 * var(--base-unit, 8px))",
-}}
-id={item}
-contentEditable="true"
-></SurveyInput>  */
-}
-// style={{
-//   overflowX: "hidden",
-//   maxWidth: "100%  ",
-
-//   flexWrap: "wrap",
-//   cursor: "default",
-//   textAlign: "center",
-//   fontSize: "calc(2 * var(--base-unit, 8px))",
-//   lineHeight: "calc(3 * var(--base-unit, 8px))",
-//   minWidth: "calc(3 * var(--base-unit, 8px))",
-//   wordSpacing: "3px",
-//   display: "inline-block",
-//   width: "3rem",
-//   borderShadow: "12px 12px 12px 12px ",
-// boxShadow: "0px 1px 2px rgb(0 0 0 / 15%)"
-//   whiteSpace: "nowrap",
-//   background: "var(--background, #fff)",
-// ,
-//   borderRadius: " calc(12.5 * var(--base-unit, 8px))",
-// }}
-
-// <StyledDiv
-// DP="flex"
-// FD="row"
-// AI="baseline"
-// style={{
-//   boxSizing: "borderBox",
-//   overflowX: "hidden",
-//   width: "100%",
-//   flexWrap: "wrap",
-// }}
-// >
-// <StyledDiv DP="flex">
-//   <IoIosRemoveCircle
-//     size={30}
-//     color="red"
-//     onClick={() => handleRemove(PageIndex, elementIndex, items)}
-//   />
-
-//   <IoIosAddCircle
-//     color="rgb(25, 179, 148)"
-//     size={30}
-//     onClick={() => handleAddRate(PageIndex, elementIndex, items)}
-//   />
-// </StyledDiv>
-
-//   {items.map((item, index) => {
-//     return (
-//       <StyledDiv DP="flex" FD="row" HG="100%" JC="space-evenly">
-//         &nbsp;
-//         <label for={item}>
-
-//           <SurveyInput
-//             role="textbox"
-//             OT="transparent"
-//             FOT="3px solid rgb(25, 179, 148)"
-//             FS="25px"
-//             HG="3rem"
-//             OW="break-word"
-//             WW="break-word"
-//             WB="break-word"
-//             AI="baseline"
-//             placeholder={item}
-//             style={{
-//               overflowX: "hidden",
-//               maxWidth: "100%  ",
-//               position: "absolute",
-//               flexWrap: "wrap",
-//               cursor: "default",
-//               textAlign: "center",
-//               fontSize: "calc(2 * var(--base-unit, 8px))",
-//               lineHeight: "calc(3 * var(--base-unit, 8px))",
-//               minWidth: "calc(3 * var(--base-unit, 8px))",
-//               wordSpacing: "3px",
-//               display: "inline-block",
-//               width: "3rem",
-//               borderShadow: "12px 12px 12px 12px ",
-
-//               whiteSpace: "nowrap",
-//               background: "var(--background, #fff)",
-//               boxShadow: "0px 1px 2px rgb(0 0 0 / 15%)",
-//               borderRadius: " calc(12.5 * var(--base-unit, 8px))",
-//             }}
-//           ></SurveyInput>
-//         </label>
-//         <StyledDiv DP="flex">
-//         <StyledInput
-//           type="radio"
-//           WD="calc(3 * var(--base-unit, 12px))"
-//           HG="3rem"
-//           FS="2px"
-//           BR="400px"
-//           id={item}
-
-//         ></StyledInput>
-//         </StyledDiv>
-//       </StyledDiv>
-//     );
-//   })}
-// </StyledDiv>

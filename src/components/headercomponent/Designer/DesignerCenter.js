@@ -4,7 +4,7 @@ import Pages from "./centersectiondata/Pages";
 import { useSelector, useDispatch } from "react-redux";
 import { AddQuestions} from "../../Redux/pageSlice";
 import { survey } from "../../Header/survey";
-import MyDropdown from "./centersectiondata/dropdown";
+import MyDropdown from "./centersectiondata/mydropdown";
 import { AddQuestionId } from "../../Redux/surveySlice";
 
 function DesignerCenter() {
@@ -38,6 +38,7 @@ const ind=useSelector((state)=>state.surveyReducer.index);
  Dispatch(AddQuestionId())  
 
   }
+
   return (
     <StyledDiv DP="flex" style={{ minHeight: "100%" }}
 
@@ -86,7 +87,7 @@ const ind=useSelector((state)=>state.surveyReducer.index);
           </StyledDiv>
     
       ) : (
-        <StyledDiv WD="100%" HG="600px" style={{overflowY:"scroll"}}>
+        <StyledDiv WD="100%" HG="648px"  BG="whiteSmoke" style={{overflowY:"scroll",scrollbarBehaviour:"smooth"}}>
           <Pages />
         </StyledDiv>
       )}

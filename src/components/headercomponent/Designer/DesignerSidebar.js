@@ -8,49 +8,72 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { AddQuestionId, DragElement } from "../../Redux/surveySlice";
+import { AddQuestionId, addQuestionIndex, addScroll, DragElement } from "../../Redux/surveySlice";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AddQuestions } from "../../Redux/pageSlice";
+import { AddQuestions, AddQuestionsOnIndex } from "../../Redux/pageSlice";
 
 import { survey } from "../../Header/survey";
 function DesignerSidebar() {
   const [value, setValue] = useState(true);
   const Form = survey[0].content[0].forms;
+  
   const PageIndex = useSelector((state) => state.surveyReducer.index);
+  const elementIndex=useSelector((state)=>state.surveyReducer.QuestionIndex);
+ 
+console.log(elementIndex)
   const Qn = useSelector((state) => state.surveyReducer.QuestionId);
+
   const Dispatch = useDispatch();
   const valu = useRef(true);
-  const handleClick = (item, PageIndex, Qn) => {
+  const handleClick = (item, PageIndex, Qn,elementIndex) => {
+  
     const text = item.data;
     const element = Object.assign({}, text, {
       name: `question${+Qn}`,
     });
-    Dispatch(AddQuestions({ element, PageIndex }));
-
+    if(elementIndex!==""){
+      
+      Dispatch(addQuestionIndex(elementIndex+1))
+    Dispatch(AddQuestionsOnIndex({ element, PageIndex,elementIndex }));
     Dispatch(AddQuestionId());
+    }else{
+      Dispatch(AddQuestions({ element, PageIndex }));
+      Dispatch(AddQuestionId());
+    }
+
+    
   };
 
-  const handleDrag = (item, PageIndex, Qn) => {
+  const handleDrag = (e,item, PageIndex, Qn) => {
+ 
     setValue(false);
     const element = item.data;
     Dispatch(DragElement({ element, PageIndex, Qn }));
   };
+
   const handleDragEnd = () => {};
   return (
-    <StyledDiv>
+    <StyledDiv >
       <StyledUl DP="flex" FD="column" JC="space-evenly">
         {Form.slice(0, 11).map((item, ind) => {
           return (
+            
             <StyledLi
-              style={{ marginBottom: ".8rem", visibility: "visible" }}
-              WD="150px"
-              BR="24px"
+              style={{ marginBottom: ".8rem" }}
+            
+              SWD="130px"
+              BR="25px"
               WS="nowrap"
               HBG="white"
+              TAR="width 0.2s"
+              HWD="150px"
+              className="dragElement"
+            tabIndex={1234}
+          
               HBS="0px 2px 6px rgb(0 0 0 / 10%)"
-              BG={value ? "" : "lightgrey"}
-              onClick={() => handleClick(item, PageIndex, Qn)}
-              onDragStart={(e) => handleDrag(item, PageIndex, Qn)}
+              BG="white"
+              onClick={() => handleClick(item, PageIndex, Qn,elementIndex)}
+              onDragStart={(e) => handleDrag(e,item, PageIndex, Qn)}
               onDragEnd={() => handleDragEnd()}
               draggable
             >
@@ -58,6 +81,7 @@ function DesignerSidebar() {
 
               <i>{item.title}</i>
             </StyledLi>
+          
           );
         })}
         <StyledLi>
@@ -78,12 +102,13 @@ function DesignerSidebar() {
                       float: "left",
                       width: "19rem",
                       height: "4rem",
+                    
                     }}
                   >
                     <Dropdown.Item
                       onClick={(e) => handleClick(e, PageIndex, Qn)}
                       className="dropItem"
-                      href="#/action-1"
+                     
                     >
                       <b>{item.icons}</b>
 

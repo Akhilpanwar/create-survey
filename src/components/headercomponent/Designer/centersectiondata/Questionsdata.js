@@ -4,6 +4,7 @@ import {
   StyledButton,
   QuestionNumber,
   Input,
+  BottomBorder,
 } from "../../../Header/styles";
 import SingleInput from "../DesignerleftSection/components/singleInput";
 import RadioGroup from "../DesignerleftSection/components/RadioGroup";
@@ -27,8 +28,8 @@ import {
   DropQuestions,
   RequiredQuestion,
 } from "../../../Redux/pageSlice";
-import { AddQuestionId } from "../../../Redux/surveySlice";
-import MyDropdown from "./dropdown";
+import { AddQuestionId, addQuestionIndex } from "../../../Redux/surveySlice";
+import MyDropdown from "./mydropdown";
 import MultipleText from "../DesignerleftSection/components/MultipleText";
 function Questionsdata({
   Page,
@@ -43,16 +44,18 @@ function Questionsdata({
 
   const el = useSelector((state) => state.surveyReducer.drag);
   const ind = useSelector((state) => state.surveyReducer.index);
-
+const [dragIndex,setDragIndex]=useState()
   const text = survey[0].content[0].forms[9].data;
 
-  const handleDragEnter = (el, ind, Qn) => {
+  const handleDragEnter = (el, ind, Qn,elementIndex) => {
+setDragIndex(null)
+  
     const PageIndex = ind;
     const element = Object.assign({}, el, {
       name: `question${+Qn}`,
     });
 
-    Dispatch(DropQuestions({ PageIndex, element }));
+    Dispatch(DropQuestions({ PageIndex, elementIndex,element }));
 
     Dispatch(AddQuestionId());
   };
@@ -72,8 +75,14 @@ function Questionsdata({
       Dispatch(RequiredQuestion({ PageIndex, elementIndex, v }));
     }
   };
+
+  const handleDragOver=(e,elementIndex)=>{
+    e.preventDefault()
+    setDragIndex(elementIndex)
+
+  }
   return (
-    <StyledDiv style={{ minHeight: "100%" }}>
+    <StyledDiv style={{ minHeight: "100%" }} >
       <StyledDiv
         DP="flex"
         FD="column"
@@ -81,14 +90,19 @@ function Questionsdata({
         JC="space-around"
         style={{ boxSizing: "border-box" }}
       >
-        <StyledDiv DP="flex" FD="column" style={{ boxSizing: "border-box" }}>
+        <StyledDiv DP="flex" FD="column" style={{ boxSizing: "border-box" }} >
+
           {Page.elements.map((element, elementIndex) => {
             return (
               <StyledDiv
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={() => handleDragEnter(el, ind, Qn)}
+              onDragOver={(e) =>handleDragOver(e,elementIndex)}
+              onDrop={() => handleDragEnter(el, ind, Qn,elementIndex)}
+          
               >
-                <StyledDiv
+                       
+          {dragIndex===elementIndex  &&<BottomBorder MT="1rem" BB="20px solid orange"></BottomBorder>}     
+           <StyledDiv
+          
                   HOT="1px solid rgba(255,154,0.9)"
                   FBV="visible"
                   HBV="visible"
@@ -101,6 +115,7 @@ function Questionsdata({
                   WD="100%"
                   FBS="0 0 0 2px var(--secondary, #ff9814)"
                   tabIndex="1234"
+                  onClick={()=>Dispatch(addQuestionIndex(elementIndex))}
                   FOT="2px solid orange"
                   MBS="1rem"
                   style={{
@@ -125,7 +140,7 @@ function Questionsdata({
                             {element.name.split("question")}.
                           </QuestionNumber>
                         </StyledDiv>
-                        <StyledDiv DP="flex">
+                        <StyledDiv DP="flex"  >
                           <Input
                             DP="flex"
                             BG="white !important"
@@ -154,9 +169,10 @@ function Questionsdata({
                             FBR="5px"
                             FS="24px"
                           />
+
                         </StyledDiv>
                         {element?.isRequired === true ? (
-                          <StyledDiv DP="flex" AS="stretch">
+                          <StyledDiv DP="flex" AS="stretch" >
                             <AiFillStar color={"red"} size={8} />
                           </StyledDiv>
                         ) : (
@@ -179,7 +195,7 @@ function Questionsdata({
                     >
                       {element.type === "text" ? (
                         <SingleInput
-                          element
+                         items={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
                           value={true}
@@ -196,43 +212,49 @@ function Questionsdata({
                           items={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
+                          show={true}
                         />
                       ) : element.type === "dropdown" ? (
                         <DropDown
                           items={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
+                          show={true}
                         />
                       ) : element.type === "TagBox" ? (
                         <TagBox
                           items={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
+                          show={true}
                         />
                       ) : element.type === "Rating" ? (
                         <Rating
                           Rates={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
-                          show={false}
+                          show={true}
                         />
                       ) : element.type === "file" ? (
                         <File
                           items={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
+                          show={true}
                         />
                       ) : element.type === "boolean" ? (
                         <Boolean
                           items={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
+                          show={true}
                         />
                       ) : element.type === "comment" ? (
                         <Comment
                           items={element}
                           PageIndex={PageIndex}
                           elementIndex={elementIndex}
+                          show={true}
                         />
                       ) : element.type === "ranking" ? (
                         <Ranking

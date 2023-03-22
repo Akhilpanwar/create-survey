@@ -22,6 +22,7 @@ function ImagePicker({ items, PageIndex, elementIndex, show }) {
   let Dispatch = useDispatch();
 
   const handleChange = (e) => {
+   
     e.preventDefault();
 
     const file = e.target.files[0];

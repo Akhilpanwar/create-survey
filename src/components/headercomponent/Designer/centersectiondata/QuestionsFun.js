@@ -183,7 +183,7 @@ function QuestionsFun({
               fontWeight: "600",
               fontSize: "calc(1.5 * var(--base-unit, 8px))",
             }}
-            onClick={() => DeleteQuestions(item, PageIndex, elementIndex)}
+            onClick={() => DeleteQuestions( PageIndex, elementIndex)}
           >
             <RiDeleteBin6Line color="orange" /> Delete
           </Delete>

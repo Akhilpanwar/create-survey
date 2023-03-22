@@ -14,6 +14,8 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { useDispatch } from "react-redux";
 import { DeleteAll } from "../Redux/pageSlice";
 import { setQuestionId } from "../Redux/surveySlice";
+import { BiUndo, BiRedo } from "react-icons/bi";
+import { ActionCreators } from "redux-undo";
 
 function Header() {
   const Dispatch = useDispatch();
@@ -73,6 +75,12 @@ function Header() {
     Dispatch(setQuestionId());
   };
 
+  const handleUndo = () => {
+    Dispatch(ActionCreators.undo());
+  };
+  const handleRedo = () => {
+    console.log("redo");
+  };
   return (
     <StyledDiv style={{ margin: "auto" }}>
       <StyledDiv DP="flex" BB="1px solid lightgrey" BG="white" HG="9rem">
@@ -123,7 +131,16 @@ function Header() {
             {survey[0].title}
           </Dropdown.Item>
         </DropdownButton>
-        <StyledDiv DP="flex" AS="end" PB="8px" PT="10px" WD="20%" JC="center">
+        <StyledDiv
+          DP="flex"
+          AS="end"
+          PB="8px"
+          PT="10px"
+          WD="20%"
+          JC="space-evenly"
+        >
+          <BiUndo size={30} color={"grey"} onClick={() => handleUndo()} />
+          <BiRedo size={30} color={"grey"} onClick={() => handleRedo()} />
           <BiEraser
             color={page.length > 0 ? "grey" : ""}
             size={30}

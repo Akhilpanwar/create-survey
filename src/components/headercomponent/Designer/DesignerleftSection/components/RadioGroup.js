@@ -5,6 +5,7 @@ import {
   StyledInput,
   SurveyInput,
   Input,
+  StyledRadio,
 } from "../../../../Header/styles";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
@@ -16,12 +17,11 @@ import {
   RemoveRadio,
   changeRadioContent,
 } from "../../../../Redux/pageSlice";
+import { AddData } from "../../../../Redux/surveySlice";
 
 function RadioGroup({ items, data, PageIndex, elementIndex, show }) {
   const [value, setValue] = useState(true);
   const [val, setVal] = useState(true);
-
-  const pg = useSelector((state) => state.PageReducer[0].Pages);
 
   const Dispatch = useDispatch();
   const num =
@@ -57,9 +57,12 @@ function RadioGroup({ items, data, PageIndex, elementIndex, show }) {
 
     Dispatch(changeRadioContent({ PageIndex, elementIndex, index, v }));
   };
-  const handleChangeCheck = (item, items) => {
-    const name = items.name;
-    const Choice = item;
+  const handleChangeCheck = (e) => {
+    const SelItem = e.target.value;
+    const Question = e.target.name;
+
+
+    Dispatch(AddData({ Question, SelItem }));
   };
   return (
     <StyledDiv DP="flex" FD="column" AI="baseline">
@@ -82,13 +85,11 @@ function RadioGroup({ items, data, PageIndex, elementIndex, show }) {
                   width: "calc(3 * var(--base-unit, 8px))",
                   height: "calc(3 * var(--base-unit, 8px))",
                 }}
-                onChange={() => handleChangeCheck(item, items)}
-                type="Radio"
-                id={item}
-                Checked={data?.item === item ? "true" : "false"}
-                name="radioGroup"
                 value={item}
-                BD="none"
+                id={item}
+                onChange={(e) => handleChangeCheck(e)}
+                name={items.name}
+                type="radio"
                 disabled={show}
               />
             </StyledDiv>
@@ -101,7 +102,7 @@ function RadioGroup({ items, data, PageIndex, elementIndex, show }) {
                 WB="break-word"
                 style={{ fontWeight: "200", color: "black" }}
                 placeholder={!item.title ? item : item.title}
-                onChange={() => handleChange(items)}
+                onInput={(e) => handleChange(e, PageIndex, elementIndex, index)}
                 BR="20px"
                 FBR="calc(.5 * var(--base-unit, 8px))"
                 OT="none"

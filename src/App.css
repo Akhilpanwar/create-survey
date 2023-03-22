@@ -7,7 +7,10 @@
   padding: 12px;
   font-size: 22px;
 }
-
+.DropDown-Menu:focus {
+  outline: 4px solid var(--primary, #19b394) !important;
+  border-radius: 0px !important;
+}
 #dropdown-basic-button:focus:hover {
   border: none;
   outline: none;
@@ -19,7 +22,7 @@
 }
 .dropdown-toggle:after {
   display: none;
- }
+}
 
 .draggable {
   border-radius: 4px;
@@ -124,15 +127,75 @@
     display: flex;
   }
 }
-
-
-select {
-  background-image:none !important;
-
- 
-  background-repeat: no-repeat;
- 
+.previewDrop:hover {
+  text-align: center;
+  color: white;
+  background-color: lightgray;
 }
-select:hover{
-background:whitesmoke;
+.previewDrop:focus {
+  background-color: var(--primary, #19b394) !important;
+}
+.my-accordion .accordion-button::after {
+  display: none;
+}
+.popover-preview {
+  width: 8rem;
+  text-align: center;
+  box-shadow: 0px calc(1 * var(--base-unit, 8px))
+    calc(2 * var(--base-unit, 8px)) rgba(0, 0, 0, 0.1) !important;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+select {
+  background-image: none !important;
+
+  background-repeat: no-repeat;
+}
+select:hover {
+  background: whitesmoke;
+}
+/* accrodium css */
+.accordion-button:hover {
+  background-color: whitesmoke !important;
+}
+
+.accordion-button {
+  background-color: transparent !important;
+  color: grey !important;
+}
+.accordion-button:focus {
+  background-color: white !important;
+  color: black !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid lightgray !important;
+}
+.accordion {
+  outline: none !important;
+  border-radius: none;
+}
+.accordion-header {
+  outline: none !important;
+  border-radius: none;
+}
+.mainDrop:hover {
+  background: whitesmoke;
+}
+.mainDrop:hover + b {
+  color: #19b394;
+}
+.mainDrop {
+  cursor: pointer;
+  padding-left: 20px;
+  font-size: calc(2 * var(--base-unit, 8px));
+  font-family: var(--font-family, var(--font-family));
+  font-weight: 400;
+}
+
+
+.dropItem{
+  border:1px solid blue;
+  border-radius: 60px;
+  
 }

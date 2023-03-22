@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
- 
   StyledDiv,
   QuestionNumber,
   SurveyInput,
@@ -19,25 +18,38 @@ import TagBox from "../Designer/DesignerleftSection/components/TagBox";
 import DropDown from "../Designer/DesignerleftSection/components/DropDown";
 import File from "../Designer/DesignerleftSection/components/File";
 import Comment from "../Designer/DesignerleftSection/components/Comment";
-
+import { Table } from "react-bootstrap";
+import Jsoneditor from "../jsonEditor/jsoneditor";
+import { useDispatch } from "react-redux";
+import { changeGroundColor } from "../../Redux/surveySlice";
 function Quest({ i }) {
   const PageIndex = i;
   const [value, setValue] = useState(true);
   const [show, setShow] = useState(true);
-  const pages = useSelector((state) => state.PageReducer[0].Pages);
-
+  const [showTable, setShowTable] = useState(false);
+  const [showJson, setShowJson] = useState(false);
+  const Pages = useSelector((state) => state.PageReducer[0].Pages);
+  
+  const data = useSelector((state) => state.surveyReducer.Pages);
+  const Dispatch = useDispatch();
   const handleClick = () => {
     setValue(!value);
   };
   const handleComplete = () => {
     setShow(false);
+    Dispatch(changeGroundColor(false));
   };
   const handlePrevious = () => {
     setShow(true);
+    Dispatch(changeGroundColor(true));
   };
-  const handleTable = () => {};
+  const handleTable = () => {
+    setShowTable(!showTable);
+    setShowJson(false);
+  };
   const handleJson = () => {
-    console.log("u click on json");
+    setShowJson(!showJson);
+    setShowTable(false);
   };
   return (
     <StyledDiv WD="100%" style={{ minWidth: "100%" }}>
@@ -64,7 +76,7 @@ function Quest({ i }) {
                 margin: "auto",
               }}
             >
-              {pages[PageIndex].elements.map((element, elementIndex) => {
+              {Pages[PageIndex].elements.map((element, elementIndex) => {
                 return (
                   <StyledDiv>
                     <StyledDiv
@@ -148,7 +160,7 @@ function Quest({ i }) {
                         >
                           {element.type === "text" ? (
                             <SingleInput
-                              element
+                              items={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
                               value={false}
@@ -159,49 +171,56 @@ function Quest({ i }) {
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
                               show={false}
+                              data={data}
                             />
                           ) : element.type === "CheckBox" ? (
                             <CheckBox
                               items={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
+                              show={false}
                             />
                           ) : element.type === "dropdown" ? (
                             <DropDown
                               items={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
+                              show={false}
                             />
                           ) : element.type === "TagBox" ? (
                             <TagBox
                               items={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
+                              show={false}
                             />
                           ) : element.type === "Rating" ? (
                             <Rating
                               Rates={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
-                              show={true}
+                              show={false}
                             />
                           ) : element.type === "file" ? (
                             <File
                               items={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
+                              show={false}
                             />
                           ) : element.type === "boolean" ? (
                             <Boolean
                               items={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
+                              show={false}
                             />
                           ) : element.type === "comment" ? (
                             <Comment
                               items={element}
                               PageIndex={PageIndex}
                               elementIndex={elementIndex}
+                              show={false}
                             />
                           ) : element.type === "ranking" ? (
                             <Ranking
@@ -256,7 +275,12 @@ function Quest({ i }) {
           ) : (
             <StyledDiv
               DP="flex"
-              style={{ minHeight: "100%", minWidth: "100%" }}
+              style={{
+                minHeight: "100%",
+                minWidth: "100%",
+                oveflowY: "Scroll",
+                maxHeight: "100%",
+              }}
             >
               <StyledDiv
                 DP="flex"
@@ -289,87 +313,144 @@ function Quest({ i }) {
                     HG="3.5rem"
                     HOT="2px solid rgb(25, 179, 148)"
                     BD="none"
+                    style={{ boxShadow: "1px 1px 2px rgb(0 0 0 / 15%)" }}
                     onClick={() => handlePrevious()}
                   >
                     Preview Survey Again
                   </StyledButton>
                 </StyledDiv>
-                <StyledDiv
-                  DP="flex"
-                  AI="baseline"
-                  HG="4rem"
-                  style={{
-                    boxSizing: "border-box",
-                    minWidth: "100%",
-                    background: "white",
-                    boxShadow: "0px 1px 2px rgb(0 0 0 / 15%)",
-                  }}
-                >
+                <StyledDiv MBE="2rem">
                   <StyledDiv
                     DP="flex"
-                    WD="90%"
-                    FD="row"
-                    HG="100%"
-                    JC="space-between"
-                    AI="center"
+                    AI="baseline"
+                    HG="4rem"
                     style={{
                       boxSizing: "border-box",
-                      marginLeft: "auto",
-                      marginRight: "auto",
+                      minWidth: "100%",
+                      background: "white",
+                      boxShadow: "0px 1px 2px rgb(0 0 0 / 15%)",
                     }}
                   >
-                    <StyledDiv DP="flex">
-                      <Heading
-                        style={{
-                          fontSize: "calc(2 * var(--base-unit, 8px))",
-                          wordSpacing: "-1px",
-                          opacity: "0.5",
-                          fontFamily: "var(--font-family)",
-                          color: "var(--foreground-light, #909090)",
-                        }}
-                      >
-                        Survey Results
-                      </Heading>
-                    </StyledDiv>
-                    <StyledDiv DP="flex" FD="row" WD="11rem" JC="space-between">
-                      <StyledDiv
-                        DP="flex"
-                        tabIndex="1234"
-                        onClick={() => handleTable()}
-                        HBG="var(--primary-light, rgba(25,179,148,0.1))"
-                        AI="end"
-                        JC="space-around"
-                        FOT="3px solid  rgb(25, 179, 148)"
-                        style={{
-                          cursor: "Default",
-                          boxSizing: "border-box",
-                          borderRadius: "40px",
-                          height: "2rem",
-                          width: "5rem",
-                        }}
-                      >
-                        <Heading TC="rgb(25, 179, 148)">As Table</Heading>
+                    <StyledDiv
+                      DP="flex"
+                      WD="90%"
+                      FD="row"
+                      HG="100%"
+                      JC="space-between"
+                      AI="center"
+                      style={{
+                        boxSizing: "border-box",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                      }}
+                    >
+                      <StyledDiv DP="flex">
+                        <Heading
+                          style={{
+                            fontSize: "calc(2 * var(--base-unit, 8px))",
+                            wordSpacing: "-1px",
+                            opacity: "0.5",
+                            fontFamily: "var(--font-family)",
+                            color: "var(--foreground-light, #909090)",
+                          }}
+                        >
+                          Survey Results
+                        </Heading>
                       </StyledDiv>
                       <StyledDiv
                         DP="flex"
-                        AI="end"
-                        tabIndex="1234"
-                        FOT="3px solid  rgb(25, 179, 148)"
-                        HBG="var(--primary-light, rgba(25,179,148,0.1))"
-                        onClick={() => handleJson()}
-                        JC="space-around"
-                        style={{
-                          cursor: "Default",
-                          boxSizing: "border-box",
-                          borderRadius: "40px",
-                          height: "2rem",
-                          width: "5rem",
-                        }}
+                        FD="row"
+                        WD="11rem"
+                        JC="space-between"
                       >
-                        <Heading TC="rgb(25, 179, 148)">As Json</Heading>{" "}
+                        <StyledDiv
+                          DP="flex"
+                          tabIndex="1234"
+                          onClick={() => handleTable()}
+                          HBG="var(--primary-light, rgba(25,179,148,0.1))"
+                          AI="end"
+                          JC="space-around"
+                          FOT="3px solid  rgb(25, 179, 148)"
+                          style={{
+                            cursor: "Default",
+                            boxSizing: "border-box",
+                            borderRadius: "40px",
+                            height: "2rem",
+                            width: "5rem",
+                          }}
+                        >
+                          <Heading TC="rgb(25, 179, 148)">As Table</Heading>
+                        </StyledDiv>
+                        <StyledDiv
+                          DP="flex"
+                          AI="end"
+                          tabIndex="1234"
+                          FOT="3px solid  rgb(25, 179, 148)"
+                          HBG="var(--primary-light, rgba(25,179,148,0.1))"
+                          onClick={() => handleJson()}
+                          JC="space-around"
+                          style={{
+                            cursor: "Default",
+                            boxSizing: "border-box",
+                            borderRadius: "40px",
+                            height: "2rem",
+                            width: "5rem",
+                            background: "whiteSmoke",
+                          }}
+                        >
+                          <Heading TC="rgb(25, 179, 148)">As Json</Heading>{" "}
+                        </StyledDiv>
                       </StyledDiv>
                     </StyledDiv>
                   </StyledDiv>
+                </StyledDiv>
+                <StyledDiv
+                  MBS="-6rem"
+                  BG="whiteSmoke !important"
+                  style={{ overflowY: "scroll", height: "7rem" }}
+                >
+                  {showTable === true && (
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr style={{ background: "white" }}>
+                          <th
+                            style={{
+                              color: "grey",
+                              fontSize: "13px",
+                              fontWeight: "200",
+                            }}
+                          >
+                            Question Title
+                          </th>
+                          <th
+                            style={{
+                              color: "grey",
+                              fontSize: "13px",
+                              fontWeight: "200",
+                            }}
+                          >
+                            Display Value
+                          </th>
+                        </tr>
+                      </thead>
+
+                      {data.map((it, ind) => {
+                        return (
+                          <tbody >
+                            <tr >
+                              <td>{it.name}</td>
+                              <td>{it.value}</td>
+                            </tr>
+                          </tbody>
+                        );
+                      })}
+                    </Table>
+                  )}
+                  {showJson === true && (
+                    <StyledDiv>
+                      <pre>{JSON.stringify(data, null, 2)}</pre>
+                    </StyledDiv>
+                  )}
                 </StyledDiv>
               </StyledDiv>
             </StyledDiv>

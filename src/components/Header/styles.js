@@ -25,8 +25,7 @@ export const StyledDiv = styled.div`
   &:hover {
     cursor: ${(props) => props.CUR};
     background: ${(props) => props.HBG};
-    outline: ${(props) => props.HOT };
-    
+    outline: ${(props) => props.HOT};
   }
   &:focus {
     outline: ${(props) => props.FOT};
@@ -65,40 +64,41 @@ export const StyledSpan = styled.span`
 
 export const StyledUl = styled.ul`
   padding-inline-start: ${(props) => props.PIS};
+
   margin-block-start: ${(props) => props.MBS};
 `;
 export const StyledLi = styled.li`
   list-style: none;
- 
-width:1px;
-    transition:width .1s;
- 
-   
-  height: 40px;
 
+
+visibility:Visible;
+  height: 40px;
+  transition:${(props)=>props.TAR};
+width:${(props)=>props.SWD};
   white-space: ${(props) => props.WS};
   padding-left: 1rem;
   padding-right: 1rem;
-  border-radius: ${(props) => props.BR};
- 
-  &:hover {
-    background-color: white;
+
+  &:hover{
     box-shadow: ${(props) => props.HBS};
+
     height: 40px;
+    border-radius: 50px;
     background: ${(props) => props.BG};
     padding-left: 1rem;
     cursor: default;
-    height: ${(props) => props.HG};
+    height:${(props) => props.HG};
+    opacity:0.7;
+    width:${(props)=>props.HWD};
   
-    width: 150px;
   }
   i {
     font: 1em/1 "rokkitt", sans-serif;
-    visibility:hidden;
-   
+    visibility: hidden;
   }
-  &:hover i{
-    visibility:visible;
+  &:hover i {
+    visibility: visible;
+  
   }
   b {
     color: grey;
@@ -110,10 +110,13 @@ width:1px;
 
   &:hover b {
     color: rgb(25, 179, 148);
-
-     
-    
   }
+&:active{
+  opacity:0.7;
+
+
+ 
+}
 `;
 
 export const StyledButton = styled.button`
@@ -185,12 +188,11 @@ export const Heading = styled.h1`
   display: ${(props) => props.DP};
   border: ${(props) => props.BD};
   text-align: ${(props) => props.TA};
-  &:hover{
-    background:${(props)=>props.HBG};
-
+  &:hover {
+    background: ${(props) => props.HBG};
   }
-  &:focus{
-    outline:${(props)=>props.FOT};
+  &:focus {
+    outline: ${(props) => props.FOT};
   }
 `;
 export const SurveyInput = styled.h3`
@@ -214,7 +216,7 @@ export const SurveyInput = styled.h3`
   align-items: ${(props) => props.AI};
   align-self: ${(props) => props.AS};
   width: ${(props) => props.WD};
- 
+
   &:focus {
     overflow: ${(props) => props.FOW};
     word-break: ${(props) => props.FWB};
@@ -234,11 +236,11 @@ export const SurveyInput = styled.h3`
   }
   [placeholder]:empty&:before {
     content: Attr(placeholder);
-    color:${(props) => props.PTC};
+    color: ${(props) => props.PTC};
     cursor: text;
-color:black;
+    color: black;
     oultine: none;
-opacity:0.5;
+    opacity: 0.5;
 
     text-decoration: none;
   }
@@ -268,7 +270,11 @@ export const Input = styled.h3`
   align-items: ${(props) => props.AI};
   align-self: ${(props) => props.AS};
   width: ${(props) => props.WD};
+  z-index: ${(props) => props.ZI};
+  accent-color:red !important;
   &:focus {
+
+
     overflow: ${(props) => props.FOW};
     word-break: ${(props) => props.FWB};
     word-wrap: ${(props) => props.FWW};
@@ -283,24 +289,22 @@ export const Input = styled.h3`
     display: ${(props) => props.FDP};
     position: ${(props) => props.FPT};
     white-space: ${(props) => props.FWS};
-    z-index: ${(props) => props.FZI};
+  
   }
   [placeholder]:empty&:before {
     content: Attr(placeholder);
     color:black
     cursor: text;
-opacity:0.9;
-    oultine: none;
-
+    opacity:0.9;
+    oultine: none;  
+    accent-color:red !important;
     text-decoration: none;
   }
 
-  &:hover {
-    background: ${(props) => props.HBG};
-  }
 `;
 export const BottomBorder = styled.h1`
   border-bottom: ${(props) => props.BB || "2px solid rgb(25, 179, 148);"};
+margin-top:${(props)=>props.MT};
 `;
 export const StyledInput = styled.input`
   margin-top: ${(props) => props.MT};
@@ -313,13 +317,12 @@ export const StyledInput = styled.input`
   font-size: ${(props) => props.FS};
   background: ${(props) => props.BG};
   position: ${(props) => props.PT};
+
   box-shadow: ${(props) => props.BS};
-  border-radius: ${(props) => props.BR};
+
+  z-index: ${(props) => props.ZI};
+
   &:focus {
-    width: ${(props) => props.FWD};
-    outline: ${(props) => props.FOT};
-    border: ${(props) => props.FBD};
-    border-radius: ${(props) => props.FBR};
   }
   &:hover {
     background: ${(props) => props.HBG};
@@ -409,16 +412,16 @@ export const Duplicate = styled.button`
     background: white;
   }
 `;
-export const DropMenu =styled.button`
-cursor: pointer;
-border: none;
-visibility: hidden;
-
-background: ${(props) => props.BG || "white"};
-&:hover {
-  background: white;
-}
-`
+export const DropMenu = styled.button`
+  cursor: pointer;
+  border: none;
+  visibility: hidden;
+  align-items: center;
+  background: ${(props) => props.BG || "white"};
+  &:hover {
+    background: white;
+  }
+`;
 export const Delete = styled.button`
   cursor: pointer;
   border: none;
@@ -436,7 +439,7 @@ export const Required = styled.button`
   cursor: pointer;
   background: white;
   display: flex;
-  align-items:baseline;
+  align-items: baseline;
 
   &:hover {
     background: var(--background-dim, #f3f3f3);
@@ -452,44 +455,66 @@ export const QuestionNumber = styled.span`
   line-height: none;
 `;
 
-
-
- export const RadioButton = styled.label`
+export const StyledRadio = styled.label`
+  z-index: ${(props) => props.ZI};
+  overflow-x: scroll;
+  height: 52px;
+  max-width: 100%;
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 16px;
+  justify-content: center;
+  text-align: center;
+  cursor: default;
+  border: 2px solid white !important;
 
-  input[type="radio"] {
-    display: none;
+  font-size: calc(2 * var(--base-unit, 8px));
+  min-width: calc(3 * var(--base-unit, 18px));
+  line-height: calc(3 * var(--base-unit, 18px));
+  border-radius: 28px;
+  whitespace: nowrap;
+  box-shadow: 0px 1px 2px rgb(0 0 0 / 15%);
+  &:focus {
+    background: var(--primary, #19b394);
+    outline: 3px solid var(--primary, #19b394);
+    color: white;
+    &:hover {
+    }
+  }
+`;
+export const StyledList = styled.li`
+  list-style: none;
+
+  height: 40px;
+  display: flex;
+  white-space: ${(props) => props.WS};
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  flex-direction: row;
+  border: 1 solid blue;
+  &:hover {
+    background: whiteSmoke;
+    padding-left: 1rem;
+    cursor: pointer;
+  }
+  b {
+    display: flex;
+  }
+  i {
+    font: 1em/1 "rokkitt", sans-serif;
+    display: inline;
+    margin-top: 1rem;
+    fontsize: 12px;
+    color: black;
+    font-weight: 100;
   }
 
-  .radio-circle {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    position: relative;
-    margin-right: 10px;
+  b {
+    color: grey;
+
+    padding: 0.675em 0.175em;
   }
 
-  .radio-circle::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #ccc;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  input[type="radio"]:checked + .radio-circle::before {
-    opacity: 1;
+  &:hover b {
+    color: rgb(25, 179, 148);
   }
 `;

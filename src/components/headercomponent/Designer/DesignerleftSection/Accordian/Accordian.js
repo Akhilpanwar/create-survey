@@ -1,19 +1,23 @@
-import {
-  StyledDiv,
-  Heading,
-  StyledInput,
-  DataButton,
-  CheckBox,
-} from "../../../styles";
- import { useSelector } from "react-redux";
- 
-export const Content = [
-  {
-    question: "General",
-    answer: (
-      <StyledDiv PD="30px">
+
+    import Accordion from 'react-bootstrap/Accordion';
+    import { StyledDiv , Heading,
+      StyledInput,
+      DataButton,
+      CheckBox,} from '../../../../Header/styles';
+    
+function Accordian({pages}) {
+
+  return (
+    <Accordion className='my-accordion' style={{background:"white"}}>
+   {pages.map((item,ind)=>{
+return(
+<>
+  <Accordion.Item eventKey="0">
+        <Accordion.Header style={{color:"lightgrey !important"}}>General</Accordion.Header>
+        <Accordion.Body >
+        <StyledDiv PD="30px">
         <Heading TC="grey" FS="15px" FBC="white" C="white">
-          Heading
+       Name
         </Heading>
         <StyledInput
           WD="100%"
@@ -21,6 +25,7 @@ export const Content = [
           BD="1px solid lightgrey"
           OT="none"
           FBD="3px solid rgb(25, 179, 148)"
+          value={!item.title?item.name:item.title}
         ></StyledInput>
         <Heading TC="grey" FS="15px">
           Description
@@ -29,17 +34,12 @@ export const Content = [
         <StyledInput
           WD="100%"
           HG="40px"
+          value={!item.description?"desciption":item.description}
           BD="1px solid lightgrey"
           OT="none"
           FBD="3px solid rgb(25, 179, 148)"
         ></StyledInput>
-        <StyledInput
-          WD="100%"
-          HG="40px"
-          BD="1px solid lightgrey"
-          OT="none"
-          FBD="3px solid rgb(25, 179, 148)"
-        ></StyledInput>
+      
         <Heading TC="grey" FS="15px">
           Editable or Read-only
         </Heading>
@@ -70,12 +70,12 @@ export const Content = [
         </Heading>
         <StyledInput></StyledInput>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "Lgo In Survey Heading",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header>Logo in Survey Title</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <Heading TC="grey" FS="15px">
           Logo(URL or base64-encoded string)
         </Heading>
@@ -116,12 +116,12 @@ export const Content = [
           <DataButton>Fill</DataButton>
         </StyledDiv>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "Navigation",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="2">
+        <Accordion.Header>Navigation</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <Heading TC="grey" FS="15px">
           Preview answer before submitting the survey
         </Heading>
@@ -237,12 +237,12 @@ export const Content = [
           FBD="3px solid rgb(25, 179, 148)"
         ></StyledInput>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "Question",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="3">
+        <Accordion.Header>Question</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <Heading TC="grey" FS="15px">
           Question Title Location
         </Heading>
@@ -340,12 +340,12 @@ export const Content = [
           </Heading>
         </StyledDiv>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "Pages",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="4">
+        <Accordion.Header>Pages</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <Heading TC="grey">page 1</Heading>
         <StyledInput></StyledInput>
         <Heading TC="grey">page 2</Heading>
@@ -363,12 +363,11 @@ export const Content = [
           </Heading>
         </StyledDiv>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "Logic",
-    answer: (
-      <>
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="5">
+        <Accordion.Header>Logic</Accordion.Header>
+        <Accordion.Body>
         <Heading TC="grey" FS="15px">
           Heading
         </Heading>
@@ -377,13 +376,12 @@ export const Content = [
           Description
         </Heading>
         <StyledInput></StyledInput>
-      </>
-    ),
-  },
-  {
-    question: "Data",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="6">
+        <Accordion.Header>Data</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <Heading>CLear invisible values</Heading>
         <StyledInput></StyledInput>
         <Heading>Update text Question value</Heading>
@@ -398,12 +396,12 @@ export const Content = [
           <Heading>save partial survey results in progress</Heading>
         </StyledDiv>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "Validation",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="7">
+        <Accordion.Header>Validation</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <StyledDiv>
           <CheckBox type="checkbox"></CheckBox>
           <Heading>set focus on the first invalid answer</Heading>
@@ -412,12 +410,12 @@ export const Content = [
 
         <StyledInput></StyledInput>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "SurveyComplete",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="8">
+        <Accordion.Header>SurveyComplete</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <Heading>Navigate to URL</Heading>
         <StyledInput></StyledInput>
         <Heading>Survey Complete Page markup </Heading>
@@ -431,12 +429,13 @@ export const Content = [
         </Heading>
         <StyledInput></StyledInput>
       </StyledDiv>
-    ),
-  },
-  {
-    question: "Timer/Quiz",
-    answer: (
-      <StyledDiv PD="30px">
+        </Accordion.Body>
+      </Accordion.Item>
+
+      <Accordion.Item eventKey="9">
+        <Accordion.Header>Timer/Quiz</Accordion.Header>
+        <Accordion.Body>
+        <StyledDiv PD="30px">
         <Heading>Time Limit to finish the survey(in seconds )</Heading>
         <StyledInput></StyledInput>
         <Heading>Time Limit to finish one page</Heading>
@@ -454,6 +453,14 @@ export const Content = [
           <DataButton>Survey</DataButton>
         </StyledDiv>
       </StyledDiv>
-    ),
-  },
-];
+        </Accordion.Body>
+      </Accordion.Item>
+      </>
+   )
+  })} 
+    </Accordion>
+  );
+}
+
+
+export default Accordian

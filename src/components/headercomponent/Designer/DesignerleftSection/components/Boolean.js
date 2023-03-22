@@ -1,7 +1,8 @@
 import React from "react";
-import { StyledDiv, SurveyInput } from "../../../../Header/styles";
+import { StyledButton, StyledDiv, StyledInput, SurveyInput } from "../../../../Header/styles";
 
-function Boolean(items, pageIndex, elementIndex) {
+function Boolean({show,items, pageIndex, elementIndex}) {
+  console.log(show)
   return (
     <StyledDiv>
       <StyledDiv DP="flex" WD="100%" HG="100%" style={{ flexWrap: "wrap" }}>
@@ -22,17 +23,19 @@ function Boolean(items, pageIndex, elementIndex) {
           }}
         >
           <StyledDiv DP="flex">
-            <SurveyInput
+         {show?  <SurveyInput
               FOT="2px solid rgb(25, 179, 148)"
               contentEditable="true"
               placeholder="YES"
               style={{ fontWeight: "200", fontSize: "18px" }}
               FBR="6px"
               DP="flex"
-            />
+            /> : 
+            <StyledInput  tabIndex={1234}>Yes</StyledInput>
+            }
           </StyledDiv>
           <StyledDiv DP="flex">
-            <SurveyInput
+          {show?  <SurveyInput
               FOT="2px solid rgb(25, 179, 148)"
               contentEditable="true"
               FBR="6px"
@@ -41,7 +44,8 @@ function Boolean(items, pageIndex, elementIndex) {
               placeholder="NO"
               OT="none"
               BD="none"
-            />
+            />:
+            <StyledDiv tabIndex={1234}>No</StyledDiv>}
           </StyledDiv>
         </StyledDiv>
       </StyledDiv>

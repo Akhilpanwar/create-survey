@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { original } from "immer";
 
-
 const i = 1;
 const myArr = [
   {
@@ -60,8 +59,13 @@ const pageSlice = createSlice({
         action.payload.element
       );
     },
+AddQuestionsOnIndex(state=initialState,action){
+state[0].Pages[action.payload.PageIndex].elements.splice(action.payload.elementIndex+1,0,action.payload.element)
+},
     DropQuestions(state = initialState, action) {
-      state[0].Pages[action.payload.PageIndex].elements.push(
+      state[0].Pages[action.payload.PageIndex].elements.splice(
+        action.payload.elementIndex,
+        0,
         action.payload.element
       );
     },
@@ -213,5 +217,7 @@ export const {
   AddRate,
   AddImage,
   DeleteImage,
+  DragQuestions,
+  AddQuestionsOnIndex,
 } = pageSlice.actions;
 export default pageSlice.reducer;
